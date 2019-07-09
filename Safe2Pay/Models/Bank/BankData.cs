@@ -1,0 +1,12 @@
+﻿namespace Safe2Pay
+{
+    public class BankData
+    {
+        public Bank Bank { get; set; }
+        public string BankAgency { get; set; }
+        public string BankAgencyDigit { get; set; }
+        public string BankAccount { get; set; }
+        public string BankAccountDigit { get; set; }
+        public string Operation { get; set; }
+    }
+}
