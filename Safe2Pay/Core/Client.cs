@@ -33,7 +33,7 @@ namespace Safe2Pay.Core
         /// Configuração do cliente.
         /// </summary>
         /// <param name="payment">Valor booleano para definir se a chamada é para pagamento</param>
-        /// <param name="timeout">Valor inteiro para definir o tempo em segundos de timeout do client. Valor default 15 segundos</param>
+        /// <param name="config">Parâmetros de autenticação</param>
         /// <returns></returns>
         public Client Create(bool payment, Config config)
         {
@@ -51,14 +51,14 @@ namespace Safe2Pay.Core
 
         //Serializar objeto de envio para JSON
 
-        private static readonly JsonSerializerSettings settings = new JsonSerializerSettings
+        private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
         {
             NullValueHandling = NullValueHandling.Ignore,
             DefaultValueHandling = DefaultValueHandling.Ignore
         };
 
         private static StringContent Serialize(object data)
-            => new StringContent(JsonConvert.SerializeObject(data, settings), Encoding.UTF8, "application/json");
+            => new StringContent(JsonConvert.SerializeObject(data, Settings), Encoding.UTF8, "application/json");
 
         //Chamadas síncronas
 

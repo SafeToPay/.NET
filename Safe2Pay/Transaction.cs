@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Reflection;
 using Newtonsoft.Json;
 using Safe2Pay.Core;
 
@@ -9,27 +10,31 @@ namespace Safe2Pay
     /// <para>Usada para demais interações com transações.</para>
     /// Deve ser utilizada para o envio (POST) de um objeto com base nas propriedades da classe SingleSale.
     /// </summary>
-    public class Transactions
+    public class Transaction
     {
         /// <summary>
         /// Construtor para as funções de transações
         /// </summary>
         /// <param name="config">Dados de autenticação</param>
-        public Transactions(Config config) => Client = new Client().Create(false, config);
+        public Transaction(Config config) => Client = new Client().Create(false, config);
 
         private Client Client { get; set; }
 
         /// <summary>
         /// Método para consultar os detalhes de uma transação.
         /// </summary>
-        /// <param name="IdTransaction">Informar o código gerado para a transação.</param>
+        /// <param name="id">Informar o código gerado para a transação.</param>
         /// <returns></returns>
-        public object Get(object IdTransaction)
+        public object Get(object id)
         {
-            var response = Client.Get($"Transaction/Get?Id={IdTransaction}");
+            var query = id is int
+                ? $"Id={id}"
+                : new FormUrlEncodedContent(id.ToQueryString()).ReadAsStringAsync().Result;
+
+            var response = Client.Get($"Transaction/Get?{query}");
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
-            if (responseObj.HasError) 
+            if (responseObj.HasError)
                 throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
 
             return responseObj.ResponseDetail;
@@ -38,14 +43,18 @@ namespace Safe2Pay
         /// <summary>
         /// Método para realizar o estorno de uma transação gerada por Cartão de Crédito.
         /// </summary>
-        /// <param name="data">Informar o código gerado para a transação.</param>
+        /// <param name="id">Informar o código gerado para a transação.</param>
         /// <returns></returns>
-        public object Refund(object data)
+        public object Refund(object id)
         {
-            var response = Client.Delete($"CreditCard/Cancel/{data}");
+            var query = id is int
+                ? id
+                : id.GetType().GetRuntimeProperty("Id").GetValue(id, null);
+
+            var response = Client.Delete($"CreditCard/Cancel/{query}");
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
-            if (responseObj.HasError) 
+            if (responseObj.HasError)
                 throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
 
             return responseObj.ResponseDetail;
@@ -54,17 +63,18 @@ namespace Safe2Pay
         /// <summary>
         /// Método para realizar o cancelamento de um boleto bancário.
         /// </summary>
-        /// <param name="data">Informar o código identificador da transação.</param>
+        /// <param name="id">Informar o código identificador da transação.</param>
         /// <returns></returns>
-        public object WriteOffBankSlip(object data)
+        public object WriteOffBankSlip(object id)
         {
-            var encodedQuery = new FormUrlEncodedContent(data.ToQueryString());
-            var queryString = encodedQuery.ReadAsStringAsync().Result;
-            
-            var response = Client.Delete($"BankSlip/WriteOffBankSlip?{queryString}");
+            var query = id is int
+                ? $"Id={id}"
+                : new FormUrlEncodedContent(id.ToQueryString()).ReadAsStringAsync().Result;
+
+            var response = Client.Delete($"BankSlip/WriteOffBankSlip?{query}");
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
-            if (responseObj.HasError) 
+            if (responseObj.HasError)
                 throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
 
             return responseObj.ResponseDetail;
@@ -73,17 +83,18 @@ namespace Safe2Pay
         /// <summary>
         /// Método para realizar a liberação de um boleto bancário.
         /// </summary>
-        /// <param name="data">Informar o código identificador da transação.</param>
+        /// <param name="id">Informar o código identificador da transação.</param>
         /// <returns></returns>
-        public object ReleaseBankSlip(object data)
+        public object ReleaseBankSlip(object id)
         {
-            var encodedQuery = new FormUrlEncodedContent(data.ToQueryString());
-            var queryString = encodedQuery.ReadAsStringAsync().Result;
-            
-            var response = Client.Get($"BankSlip/RealeaseBankSlip?{queryString}");
+            var query = id is int
+                ? $"Id={id}"
+                : new FormUrlEncodedContent(id.ToQueryString()).ReadAsStringAsync().Result;
+
+            var response = Client.Get($"BankSlip/ReleaseBankSlip?{query}");
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
-            if (responseObj.HasError) 
+            if (responseObj.HasError)
                 throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
 
             return responseObj.ResponseDetail;
@@ -92,17 +103,18 @@ namespace Safe2Pay
         /// <summary>
         /// Método para realizar o cancelamento de um carnê.
         /// </summary>
-        /// <param name="data">Informar o código identificador do carnê.</param>
+        /// <param name="identifier">Informar o código identificador do carnê.</param>
         /// <returns></returns>
-        public object CancelCarnet(object data)
+        public object CancelCarnet(object identifier)
         {
-            var encodedQuery = new FormUrlEncodedContent(data.ToQueryString());
-            var queryString = encodedQuery.ReadAsStringAsync().Result;
-            
-            var response = Client.Delete($"Carnet/Delete?{queryString}");
+            var query = identifier is string
+                ? $"Id={identifier}"
+                : new FormUrlEncodedContent(identifier.ToQueryString()).ReadAsStringAsync().Result;
+
+            var response = Client.Delete($"Carnet/Delete?{query}");
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
-            if (responseObj.HasError) 
+            if (responseObj.HasError)
                 throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
 
             return responseObj.ResponseDetail;
@@ -111,17 +123,18 @@ namespace Safe2Pay
         /// <summary>
         /// Método para realizar o cancelamento de um lote de carnês.
         /// </summary>
-        /// <param name="data">Informar o código identificador do carnê.</param>
+        /// <param name="identifier">Informar o código identificador do carnê.</param>
         /// <returns></returns>
-        public object CancelCarnetLot(object data)
+        public object CancelCarnetLot(object identifier)
         {
-            var encodedQuery = new FormUrlEncodedContent(data.ToQueryString());
-            var queryString = encodedQuery.ReadAsStringAsync().Result;
-            
-            var response = Client.Delete($"CarnetAsync/Delete?{queryString}");
+            var query = identifier is string
+                ? $"Id={identifier}"
+                : new FormUrlEncodedContent(identifier.ToQueryString()).ReadAsStringAsync().Result;
+
+            var response = Client.Delete($"CarnetAsync/Delete?{query}");
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
-            if (responseObj.HasError) 
+            if (responseObj.HasError)
                 throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
 
             return responseObj.ResponseDetail;

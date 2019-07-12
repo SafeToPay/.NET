@@ -20,9 +20,9 @@ namespace Safe2Pay
         /// </summary>
         /// <param name="data">Dados do destinatário da cobrança, dos produtos e formas de pagamento que estarão habilitadas para uso.</param>
         /// <returns></returns>
-        public object New(object data)
+        public object New(object invoice)
         {
-            var response = Client.Post("SingleSale/Add", data);
+            var response = Client.Post("SingleSale/Add", invoice);
 
             var responseObj = JsonConvert.DeserializeObject<Response<InvoiceResponse>>(response);
             if (responseObj.HasError)

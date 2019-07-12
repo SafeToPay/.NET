@@ -22,11 +22,11 @@ namespace Safe2Pay
         /// <summary>
         /// Método para gerar uma nova transação por Boleto Bancário.
         /// </summary>
-        /// <param name="data">Objeto com base no modelo BankSlip, da classe Transaction.</param>
+        /// <param name="bankSlip">Objeto com base no modelo BankSlip, da classe Transaction.</param>
         /// <returns></returns>
-        public object BankSlip(object data)
+        public object BankSlip(object bankSlip)
         {
-            var response = Client.Post("Payment", data);
+            var response = Client.Post("Payment", bankSlip);
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
             if (responseObj.HasError)
@@ -38,11 +38,11 @@ namespace Safe2Pay
         /// <summary>
         /// Método para gerar uma nova transação por Carnê/Fatura.
         /// </summary>
-        /// <param name="data">Objeto com base no modelo Carnet, da classe Transaction.</param>
+        /// <param name="carnet">Objeto com base no modelo Carnet, da classe Transaction.</param>
         /// <returns></returns>
-        public object Carnet(object data)
+        public object Carnet(object carnet)
         {
-            var response = Client.Post("Carnet", data);
+            var response = Client.Post("Carnet", carnet);
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
             if (responseObj.HasError)
@@ -54,11 +54,11 @@ namespace Safe2Pay
         /// <summary>
         /// Método para gerar uma nova transação por Carnê/Fatura em lote.
         /// </summary>
-        /// <param name="data">Objeto com base no modelo CarnetLot, da classe Transaction.</param>
+        /// <param name="carnet">Objeto com base no modelo CarnetLot, da classe Transaction.</param>
         /// <returns></returns>
-        public object CarnetLot(object data)
+        public object CarnetLot(object carnet)
         {
-            var transactionCompressed = Utils.Compress(Utils.Serialize(data));
+            var transactionCompressed = Utils.Compress(Utils.Serialize(carnet));
             var carnetLot = new CarnetLot { JsonGzip = transactionCompressed };
 
             var response = Client.Post("CarnetAsync", carnetLot);
@@ -74,11 +74,11 @@ namespace Safe2Pay
         /// <summary>
         /// Método para gerar uma nova transação por Cartão de Crédito.
         /// </summary>
-        /// <param name="data">Objeto com base no modelo CreditCard, da Transaction.</param>
+        /// <param name="credit">Objeto com base no modelo CreditCard, da Transaction.</param>
         /// <returns></returns>
-        public object Credit(object data)
+        public object Credit(object credit)
         {
-            var response = Client.Post("Payment", data);
+            var response = Client.Post("Payment", credit);
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
             if (responseObj.HasError)
@@ -90,11 +90,11 @@ namespace Safe2Pay
         /// <summary>
         /// Método para tokenizar os dados de um cartão de crédito.
         /// </summary>
-        /// <param name="data">Objeto com base no modelo CreditCard.</param>
+        /// <param name="card">Objeto com base no modelo CreditCard.</param>
         /// <returns></returns>
-        public object Tokenize(object data)
+        public object Tokenize(object card)
         {
-            var response = Client.Post("Token", data);
+            var response = Client.Post("Token", card);
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
             if (responseObj.HasError)
@@ -106,11 +106,11 @@ namespace Safe2Pay
         /// <summary>
         /// Método para gerar uma nova transação por Cartão de Débito.
         /// </summary>
-        /// <param name="data">Objeto com base no modelo DebitCard, da Transaction.</param>
+        /// <param name="debit">Objeto com base no modelo DebitCard, da Transaction.</param>
         /// <returns></returns>
-        public object Debit(object data)
+        public object Debit(object debit)
         {
-            var response = Client.Post("Payment", data);
+            var response = Client.Post("Payment", debit);
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
             if (responseObj.HasError)
@@ -122,11 +122,11 @@ namespace Safe2Pay
         /// <summary>
         /// Método para gerar uma nova transação por Bitcoin.
         /// </summary>
-        /// <param name="data">Objeto com base no modelo Bitcoin, da Transaction.</param>
+        /// <param name="bitcoin">Objeto com base no modelo Bitcoin, da Transaction.</param>
         /// <returns></returns>
-        public object Bitcoin(object data)
+        public object Bitcoin(object bitcoin)
         {
-            var response = Client.Post("Payment", data);
+            var response = Client.Post("Payment", bitcoin);
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
             if (responseObj.HasError)

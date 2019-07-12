@@ -1,5 +1,6 @@
-
 # Safe2Pay .NET SDK
+
+![Safe2Pay](https://safe2pay.com.br/static/img/banner-github.png)
 
 ##### Biblioteca de integração em .NET para o [Safe2Pay](https://safe2pay.com.br/Safe2Pay/).
 
@@ -19,35 +20,38 @@ Usando o Package Manager: `Install-Package Safe2Pay`.
 .NET Framework 4.5+ ou
 .NET Core 1.0+
 
-## Configuração
+## Utilização
 
-Antes de iniciar a utilização da biblioteca, é necessário informar os dados básicos de autenticação na API e também em qual ambiente será feita a utilização, Produção (`isSandbox: false`) ou Sandbox (`isSandbox: true`), **não esquecendo de utilizar os dados do Token e da Secret Key conforme o ambiente definido**. Esta configuração está dentro da classe `Config` e complementará a chamada da API com os dados da sua empresa. Segue exemplo abaixo:
+A integração com a API do Safe2Pay se dá pelo modelo RESTful, de forma a realizar a transferência segura e simplificada dos dados pelo formato JSON. Para facilitar o envio dos dados, deve-se montar um objeto para envio baseado nos modelos disponíveis, com exemplos abaixo, e a própria chamada do método desejado realizará o tratamento e conversão deste objeto para JSON. 
+
+### Configuração
+
+Antes de iniciar a utilização da biblioteca, é necessário informar os dados básicos de autenticação na API e também em qual ambiente será feita sua utilização, se em Produção (`isSandbox: false`) ou em Sandbox (`isSandbox: true`), **não esquecendo de utilizar os dados do Token e da Secret Key correspondentes ao ambiente definido**. Esta configuração está dentro da classe `Config` e complementará a chamada da API com os dados da sua empresa e deve ser utilizada na inicialização da classe com os métodos desejados. Segue exemplo abaixo:
 
 ```
-Config.SetEnvironment(
+var config = new Config(
     token: "PREENCHA_COM_SEU_TOKEN",
     secret: "PREENCHA_COM_SUA_SECRET_KEY",
     isSandbox: true );
+
+var checkout = new Checkout(config);
+//Utilização dos métodos em Checkout...
 ```
-
-### Utilização
-
-A integração com a API do Safe2Pay se dá pelo modelo RESTful, de forma a realizar a transferência segura e simplificada dos dados pelo formato JSON. Para facilitar o envio dos dados, deve-se montar um objeto para envio baseado nos modelos disponíveis, com exemplos abaixo, e a própria chamada do método desejado realizará o tratamento e conversão deste objeto para JSON. 
 
 ### Tratamento das respostas da API
 
 Após o envio, a própria chamada devolverá a resposta em um objeto completo, onde, com o cast simples das classes `CheckoutResponse` (para transações) ou `InvoiceResponse` (para solicitações de cobrança) permitirá o tratamento das propriedades do objeto de retorno de forma simplificada, sem a necessidade de criar os mesmos modelos em seu projeto.
 
 ```
-var transaction = /*DADOS DO OBJETO DE ENVIO DA TRANSAÇÃO*/;
-var response = (CheckoutResponse)Checkout.Credit(transaction); 
+var checkout = new Checkout(config);
+var response = (CheckoutResponse)checkout.Credit(transaction); 
 
 Console.WriteLine($"Transação {response.IdTransaction} gerada com sucesso!");
 ```
 
 ## Pagamentos / Transações
 
-Existem duas classes responsáveis pela geração e tratamentos de transações, `Checkout` e `Transactions`, onde cada uma possui os métodos disponíveis para cada .
+Existem duas classes responsáveis pela geração e tratamentos de transações, `Checkout` e `Transaction`, onde cada uma possui os métodos disponíveis para cada .
 
 O objeto esperado para uma transação deve seguir o modelo abaixo:
 
@@ -134,7 +138,9 @@ O método `BankSlip` é o responsável pelo envio de uma transação com boleto e est
 
 ```
 var bankSlip = new Transaction<BankSlip> { /*CORPO DO OBJETO DA TRANSAÇÃO*/ };
-var response = (CheckoutResponse)Checkout.BankSlip(bankSlip);
+
+var checkout = new Checkout(config);
+var response = (CheckoutResponse)checkout.BankSlip(bankSlip);
 
 Console.WriteLine($"Transação {response.IdTransaction} gerada com sucesso.");
 
@@ -156,7 +162,8 @@ var card = new CreditCard
 	SecurityCode = "999"
 };
 
-var response = (CheckoutResponse)Checkout.Tokenize(card);
+var checkout = new Checkout(config);
+var response = (CheckoutResponse)checkout.Tokenize(card);
 
 Console.WriteLine($"Token '{teste.Token}' criado com sucesso!");
 ```
@@ -189,7 +196,9 @@ O método `Credit` é o responsável pelo envio de uma transação com cartão de créd
 
 ```
 var credit = new Transaction<CreditCard> { /*CORPO DO OBJETO DA TRANSAÇÃO*/ };
-var response = (CheckoutResponse)Checkout.Credit(credit);
+
+var checkout = new Checkout(config);
+var response = (CheckoutResponse)checkout.Credit(credit);
 
 Console.WriteLine($"Transação {response.IdTransaction} gerada com sucesso!");
 
@@ -198,10 +207,11 @@ Console.WriteLine(response.Status.Equals("3")
 	: $"Ocorreu um erro: {response.Message}"); // Se status != 3, exibir a mensagem com o erro ocorrido
 ```
 
-Para realizar o estorno de uma transação realizada por cartão de crédito, deve-se utilizar o método `Refund`, dentro da classe `Transactions`.
+Para realizar o estorno de uma transação realizada por cartão de crédito, deve-se utilizar o método `Refund`, dentro da classe `Transaction`.
 
 ```
-var refund = Transactions.Refund(response.IdTransaction); //Utilizando a transação anterior como exemplo
+var transaction = new Transaction(config);
+var refund = transaction.Refund(response.IdTransaction); //Utilizando a transação anterior como exemplo
 
 if (refund.isCancelled) Console.WriteLine("Estorno realizado com sucesso!");
 ```
@@ -221,7 +231,9 @@ O método `Bitcoin` é o responsável pelo envio de uma transação com Bitcoin e est
 
 ```
 var bitcoin = new Transaction<Bitcoin> { /*CORPO DO OBJETO DA TRANSAÇÃO*/ };
-var response = (CheckoutResponse)Checkout.Bitcoin(bitcoin);
+
+var checkout = new Checkout(config);
+var response = (CheckoutResponse)checkout.Bitcoin(bitcoin);
 
 Console.WriteLine($"Transação {response.IdTransaction} gerada com sucesso.");
 
@@ -255,7 +267,9 @@ O método `Debit` é o responsável pelo envio de uma transação com cartão de débit
 
 ```
 var debit = new Transaction<DebitCard> { /*CORPO DO OBJETO DA TRANSAÇÃO*/ };
-var response = (CheckoutResponse)Checkout.Debit(debit);
+
+var checkout = new Checkout(config);
+var response = (CheckoutResponse)checkout.Debit(debit);
 
 Console.WriteLine($"Transação {response.IdTransaction} gerada com sucesso!");
 
@@ -264,7 +278,7 @@ Console.WriteLine($"Pagamento pendente. Por favor, acesse a página {response.Aut
 
 ## Solicitações de Cobrança / Vendas Rápidas
 
-Na classe `Sales` estão os métodos disponíveis pela geração e tratamento de solicitações de cobrança.
+Na classe `Invoice` estão os métodos disponíveis pela geração e tratamento de solicitações de cobrança.
 
 O objeto para uma nova venda deve ser montado seguindo o modelo abaixo:
 
@@ -310,7 +324,8 @@ var singleSale = new SingleSale
     Emails = new List<string> { "email1@empresa.com.br", "email2@company.com" } //E-mails para envio da cobrança
 };
 
-var response = (InvoiceResponse)Sales.New(singleSale);
+var invoice = new Invoice(config);
+var response = (InvoiceResponse)invoice.New(singleSale);
 
 Console.WriteLine($"Solicitação {response.SingleSaleHash} gerada com sucesso!");
 
@@ -323,7 +338,8 @@ Para realizar o cancelamento de uma solicitação de cobrança, basta realizar uma 
 //Utilizando a resposta do método anterior como variável
 var saleToCancel = new SingleSale { SingleSaleHash = response.SingleSaleHash }; 
 
-var confirmation = Sales.Cancel(saleToCancel);
+var invoice = new Invoice(config);
+var confirmation = invoice.Cancel(saleToCancel);
 
 if (confirmation) Console.WriteLine("Cobrança cancelada com sucesso!");
 ```

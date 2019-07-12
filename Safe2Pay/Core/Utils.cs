@@ -43,7 +43,7 @@ namespace Safe2Pay
             return Convert.ToBase64String(compressed);
         }
 
-        public static byte[] Compress(byte[] input)
+        private static byte[] Compress(byte[] input)
         {
             using (var result = new MemoryStream())
             {
@@ -59,11 +59,11 @@ namespace Safe2Pay
             }
         }
 
-        private static readonly JsonSerializerSettings settings = new JsonSerializerSettings
+        private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
             { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore };
 
-        public static string Serialize(object data) => JsonConvert.SerializeObject(data, settings);
+        public static string Serialize(object data) => JsonConvert.SerializeObject(data, Settings);
 
-        public static T Deserialize<T>(string data) => JsonConvert.DeserializeObject<T>(data, settings);
+        public static T Deserialize<T>(string data) => JsonConvert.DeserializeObject<T>(data, Settings);
     }
 }

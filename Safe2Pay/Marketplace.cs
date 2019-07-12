@@ -18,7 +18,7 @@ namespace Safe2Pay
         /// <summary>
         /// Chamada para criar uma nova subconta.
         /// </summary>
-        /// <param name="merchant"></param>
+        /// <param name="merchant">Dados da empresa que será adicionada.</param>
         /// <returns></returns>
         public object New(object merchant)
         {
@@ -31,6 +31,11 @@ namespace Safe2Pay
             return responseObj.ResponseDetail;
         }
 
+        /// <summary>
+        /// Consultar dados de subconta.
+        /// </summary>
+        /// <param name="id">Id gerado na criação da subconta. Também disponível na URL de consulta do painel administrativo.</param>
+        /// <returns></returns>
         public object Get(object id)
         {
             var query = id is int
@@ -46,6 +51,12 @@ namespace Safe2Pay
             return responseObj.ResponseDetail;
         }
 
+        /// <summary>
+        /// Atualizar dados de subconta.
+        /// </summary>
+        /// <param name="merchant">Dados que devem ser alterados</param>
+        /// <param name="id">Id gerado na criação da subconta. Também disponível na URL de consulta do painel administrativo.</param>
+        /// <returns></returns>
         public object Update(object merchant, object id)
         {
             var query = id is int
@@ -61,6 +72,10 @@ namespace Safe2Pay
             return responseObj.ResponseDetail;
         }
 
+        /// <summary>
+        /// Listar subcontas cadastradas no ambiente principal.
+        /// </summary>
+        /// <returns></returns>
         public object List()
         {
             var query = new Filter<Merchant> { PageNumber = 1, RowsPerPage = 100 };
@@ -76,6 +91,11 @@ namespace Safe2Pay
             return responseObj.ResponseDetail.Objects;
         }
 
+        /// <summary>
+        /// Excluir subconta.
+        /// </summary>
+        /// <param name="id">Id gerado na criação da subconta. Também disponível na URL de consulta do painel administrativo.</param>
+        /// <returns></returns>
         public bool Delete(object id)
         {
             var query = id is int
