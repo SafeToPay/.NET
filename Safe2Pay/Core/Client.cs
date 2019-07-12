@@ -11,31 +11,39 @@ namespace Safe2Pay.Core
     {
         private readonly HttpClient _client;
 
-        private Client(string baseUrl)
+        public Client() { }
+
+        private Client(string baseUrl, Config config)
         {
             _client = new HttpClient
             {
-                BaseAddress = new Uri(baseUrl), 
-                Timeout = new TimeSpan(0, 0, 0, 15)
+                BaseAddress = new Uri(baseUrl),
+                Timeout = new TimeSpan(0, 0, 0, config.GetTimeout())
             };
-            
+
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _client.DefaultRequestHeaders.Add("X-API-KEY", Config.GetToken());
+            _client.DefaultRequestHeaders.Add("X-API-KEY", config.GetToken());
         }
 
-        private static Client _paymentClient;
-        private static Client _mainClient;
+        private Client _paymentClient;
+        private Client _mainClient;
 
-        public static Client Create(bool payment)
+        /// <summary>
+        /// Configuração do cliente.
+        /// </summary>
+        /// <param name="payment">Valor booleano para definir se a chamada é para pagamento</param>
+        /// <param name="timeout">Valor inteiro para definir o tempo em segundos de timeout do client. Valor default 15 segundos</param>
+        /// <returns></returns>
+        public Client Create(bool payment, Config config)
         {
             if (!payment)
             {
-                _mainClient = _mainClient ?? new Client("https://api.safe2pay.com.br/v2/");
+                _mainClient = _mainClient ?? new Client("https://api.safe2pay.com.br/v2/", config);
                 return _mainClient;
             }
 
-            _paymentClient = _paymentClient ?? new Client("https://payment.safe2pay.com.br/v2/");
+            _paymentClient = _paymentClient ?? new Client("https://payment.safe2pay.com.br/v2/", config);
             return _paymentClient;
         }
 
@@ -44,11 +52,11 @@ namespace Safe2Pay.Core
         //Serializar objeto de envio para JSON
 
         private static readonly JsonSerializerSettings settings = new JsonSerializerSettings
-            { 
-                NullValueHandling = NullValueHandling.Ignore, 
-                DefaultValueHandling = DefaultValueHandling.Ignore
-            };
-        
+        {
+            NullValueHandling = NullValueHandling.Ignore,
+            DefaultValueHandling = DefaultValueHandling.Ignore
+        };
+
         private static StringContent Serialize(object data)
             => new StringContent(JsonConvert.SerializeObject(data, settings), Encoding.UTF8, "application/json");
 

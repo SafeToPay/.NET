@@ -1,41 +1,46 @@
 ﻿namespace Safe2Pay
 {
-    public static class Config
+    public class Config
     {
-        private static bool IsSandbox { get; set; }
-        private static string Token { get; set; }
-        private static string TokenSandbox { get; set; }
-        private static string SecretKey { get; set; }
-        private static string SecretKeySandbox { get; set; }
-
-        private static bool IsSandBox() => IsSandbox;
-        private static void SetSandBox() => IsSandbox = true;
-        private static void SetProduction() => IsSandbox = false;
-
-        public static string GetToken() => !IsSandBox() ? Token : TokenSandbox;
-        
-        public static string GetSecret() => !IsSandBox() ? SecretKey : SecretKeySandbox;
-        
         /// <summary>
         /// Configuração para poder enviar os dados de sua empresa nas chamadas para a API.
         /// </summary>
         /// <param name="token">Token de integração gerado, disponível na área de Integração do painel administrativo.</param>
-        /// <param name="secret">Secret Key, disponível na área de Integração do painel administrativo.</param>
+        /// <param name="secretKey">Secret Key, disponível na área de Integração do painel administrativo.</param>
         /// <param name="isSandbox">Valor booleano para definir se os dados enviados serão em Sandbox ou não. USAR O TOKEN e SECRET KEY correspondentes.</param>
-        public static void SetEnvironment(string token, string secret, bool isSandbox)
+        /// <param name="timeout">Valor inteiro para definir o tempo em segundos de timeout do client. Valor default 60 segundos.</param>
+        public Config(string token, string secretKey, bool isSandbox, int timeout = 15)
         {
-            if (!isSandbox)
+            Timeout = timeout;
+
+            if (isSandbox)
             {
-                SetProduction(); 
-                Token = token;
-                SecretKey = secret;
+                TokenSandbox = token;
+                SecretKeySandbox = secretKey;
+                SetSandbox();
             }
             else
             {
-                SetSandBox(); 
-                TokenSandbox = token;
-                SecretKeySandbox = secret;
+                Token = token;
+                SecretKey = secretKey;
+                SetProduction();
             }
         }
+
+        private bool IsSandbox { get; set; }
+        private string Token { get; set; }
+        private string TokenSandbox { get; set; }
+        private string SecretKey { get; set; }
+        private string SecretKeySandbox { get; set; }
+
+        public string GetToken() => !IsSandBox() ? Token : TokenSandbox;
+        public string GetSecret() => !IsSandBox() ? SecretKey : SecretKeySandbox;
+        public bool IsSandBox() => IsSandbox;
+        private void SetSandbox() => IsSandbox = true;
+        private void SetProduction() => IsSandbox = false;
+
+        private int Timeout { get; set; }
+
+        public int GetTimeout() => Timeout;
     }
 }

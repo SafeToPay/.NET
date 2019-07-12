@@ -4,7 +4,7 @@
     <TargetFramework>netstandard1.1</TargetFramework>
     <Authors>Safe2Pay Intermediações de Pagamentos Ltda.</Authors>
     <Company>Safe2Pay Intermediações de Pagamentos Ltda.</Company>
-    <Version>1.0.2</Version>
+    <Version>1.0.4</Version>
     <PackageIconUrl>https://safe2pay.com.br/static/card-share-checkout.png</PackageIconUrl>
     <PackageProjectUrl>https://safe2pay.com.br/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SafeToPay/</RepositoryUrl>
@@ -19,15 +19,9 @@ Construído em .NET Standard 1.1, também compatível com .NET Framework 4.5+ e 
     <PackageTags></PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
-    <AssemblyVersion>1.0.2</AssemblyVersion>
-    <FileVersion>1.0.1.0</FileVersion>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <FileVersion>1.0.4.0</FileVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Models\Payment\Single\**" />
-    <EmbeddedResource Remove="Models\Payment\Single\**" />
-    <None Remove="Models\Payment\Single\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />

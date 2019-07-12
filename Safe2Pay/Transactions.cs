@@ -5,16 +5,26 @@ using Safe2Pay.Core;
 
 namespace Safe2Pay
 {
+    /// <summary>
+    /// <para>Usada para demais interações com transações.</para>
+    /// Deve ser utilizada para o envio (POST) de um objeto com base nas propriedades da classe SingleSale.
+    /// </summary>
     public class Transactions
     {
-        private static readonly Client Client = Client.Create(false);
-        
+        /// <summary>
+        /// Construtor para as funções de transações
+        /// </summary>
+        /// <param name="config">Dados de autenticação</param>
+        public Transactions(Config config) => Client = new Client().Create(false, config);
+
+        private Client Client { get; set; }
+
         /// <summary>
         /// Método para consultar os detalhes de uma transação.
         /// </summary>
         /// <param name="IdTransaction">Informar o código gerado para a transação.</param>
         /// <returns></returns>
-        public static object Get(object IdTransaction)
+        public object Get(object IdTransaction)
         {
             var response = Client.Get($"Transaction/Get?Id={IdTransaction}");
 
@@ -30,7 +40,7 @@ namespace Safe2Pay
         /// </summary>
         /// <param name="data">Informar o código gerado para a transação.</param>
         /// <returns></returns>
-        public static object Refund(object data)
+        public object Refund(object data)
         {
             var response = Client.Delete($"CreditCard/Cancel/{data}");
 
@@ -46,7 +56,7 @@ namespace Safe2Pay
         /// </summary>
         /// <param name="data">Informar o código identificador da transação.</param>
         /// <returns></returns>
-        public static object WriteOffBankSlip(object data)
+        public object WriteOffBankSlip(object data)
         {
             var encodedQuery = new FormUrlEncodedContent(data.ToQueryString());
             var queryString = encodedQuery.ReadAsStringAsync().Result;
@@ -65,7 +75,7 @@ namespace Safe2Pay
         /// </summary>
         /// <param name="data">Informar o código identificador da transação.</param>
         /// <returns></returns>
-        public static object ReleaseBankSlip(object data)
+        public object ReleaseBankSlip(object data)
         {
             var encodedQuery = new FormUrlEncodedContent(data.ToQueryString());
             var queryString = encodedQuery.ReadAsStringAsync().Result;
@@ -84,7 +94,7 @@ namespace Safe2Pay
         /// </summary>
         /// <param name="data">Informar o código identificador do carnê.</param>
         /// <returns></returns>
-        public static object CancelCarnet(object data)
+        public object CancelCarnet(object data)
         {
             var encodedQuery = new FormUrlEncodedContent(data.ToQueryString());
             var queryString = encodedQuery.ReadAsStringAsync().Result;
@@ -103,7 +113,7 @@ namespace Safe2Pay
         /// </summary>
         /// <param name="data">Informar o código identificador do carnê.</param>
         /// <returns></returns>
-        public static object CancelCarnetLot(object data)
+        public object CancelCarnetLot(object data)
         {
             var encodedQuery = new FormUrlEncodedContent(data.ToQueryString());
             var queryString = encodedQuery.ReadAsStringAsync().Result;
