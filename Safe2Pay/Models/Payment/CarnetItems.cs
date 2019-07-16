@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Safe2Pay
+namespace Safe2Pay.Models
 {
     public class CarnetItems
     {

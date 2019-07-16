@@ -8,16 +8,16 @@ using Safe2Pay.Models;
 namespace Safe2Pay
 {
     /// <summary>
-    /// <para>Usada para demais interações com transações.</para>
+    /// <para>Usada para solicitações de Transferência.</para>
     /// Deve ser utilizada para o envio (POST) de um objeto com base nas propriedades da classe SingleSale.
     /// </summary>
-    public class Transaction
+    public class Transfer
     {
         /// <summary>
         /// Construtor para as funções de transações
         /// </summary>
         /// <param name="config">Dados de autenticação</param>
-        public Transaction(Config config) => Client = new Client().Create(false, config);
+        public Transfer(Config config) => Client = new Client().Create(false, config);
 
         private Client Client { get; set; }
 

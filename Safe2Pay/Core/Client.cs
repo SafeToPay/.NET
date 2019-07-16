@@ -18,12 +18,12 @@ namespace Safe2Pay.Core
             _client = new HttpClient
             {
                 BaseAddress = new Uri(baseUrl),
-                Timeout = new TimeSpan(0, 0, 0, config.GetTimeout())
+                Timeout = new TimeSpan(0, 0, 0, config.Timeout)
             };
 
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _client.DefaultRequestHeaders.Add("X-API-KEY", config.GetToken());
+            _client.DefaultRequestHeaders.Add("X-API-KEY", config.Token);
         }
 
         private Client _paymentClient;
@@ -74,7 +74,7 @@ namespace Safe2Pay.Core
         public string Delete(string url) =>
             _client.DeleteAsync(url).Result.Content.ReadAsStringAsync().Result;
 
-        //Chamadas assíncronas
+        //TODO: Implementar métodos assíncronos em todas as classes
 
         public async Task<HttpResponseMessage> GetAsync(string url) =>
             await _client.GetAsync(url).ConfigureAwait(false);

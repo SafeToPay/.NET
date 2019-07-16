@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Safe2Pay
+namespace Safe2Pay.Models
 {
     public class DebitAccountReturn
     {

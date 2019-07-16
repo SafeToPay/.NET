@@ -8,14 +8,14 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Safe2Pay
+namespace Safe2Pay.Core
 {
     public static class Utils
     {
         public static IDictionary<string, string> ToQueryString(this object obj)
         {
             if (obj == null) return null;
-            if (!(obj is JToken token)) return ToQueryString(JObject.FromObject(obj));
+            if (!(obj is JToken token)) return JObject.FromObject(obj).ToQueryString();
             var content = new Dictionary<string, string>();
             if (token.HasValues)
             {
@@ -60,7 +60,7 @@ namespace Safe2Pay
         }
 
         private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
-            { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore };
+        { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore };
 
         public static string Serialize(object data) => JsonConvert.SerializeObject(data, Settings);
 

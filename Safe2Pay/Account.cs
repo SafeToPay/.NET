@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Safe2Pay.Core;
+using Safe2Pay.Models;
 
 namespace Safe2Pay
 {

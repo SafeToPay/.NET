@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Safe2Pay
+namespace Safe2Pay.Models
 {
     public class CheckingAccountFilter : Filter<CheckingAccount>
     {

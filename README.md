@@ -1,3 +1,4 @@
+
 # Safe2Pay .NET SDK
 
 ![Safe2Pay](https://safe2pay.com.br/static/img/banner-github.png)
@@ -26,13 +27,12 @@ A integração com a API do Safe2Pay se dá pelo modelo RESTful, de forma a realiza
 
 ### Configuração
 
-Antes de iniciar a utilização da biblioteca, é necessário informar os dados básicos de autenticação na API e também em qual ambiente será feita sua utilização, se em Produção (`isSandbox: false`) ou em Sandbox (`isSandbox: true`), **não esquecendo de utilizar os dados do Token e da Secret Key correspondentes ao ambiente definido**. Esta configuração está dentro da classe `Config` e complementará a chamada da API com os dados da sua empresa e deve ser utilizada na inicialização da classe com os métodos desejados. Segue exemplo abaixo:
+Antes de iniciar a utilização da biblioteca, é necessário informar os dados básicos de autenticação na API, **não esquecendo de utilizar o Token eda Secret Key correspondentes ao ambiente definido, Produção ou Sandbox**. Esta configuração está dentro da classe `Config` e complementará a chamada da API com os dados da sua empresa e deve ser utilizada na inicialização da classe com os métodos desejados. Segue exemplo abaixo:
 
 ```
 var config = new Config(
     token: "PREENCHA_COM_SEU_TOKEN",
-    secret: "PREENCHA_COM_SUA_SECRET_KEY",
-    isSandbox: true );
+    secret: "PREENCHA_COM_SUA_SECRET_KEY");
 
 var checkout = new Checkout(config);
 //Utilização dos métodos em Checkout...
@@ -40,7 +40,7 @@ var checkout = new Checkout(config);
 
 ### Tratamento das respostas da API
 
-Após o envio, a própria chamada devolverá a resposta em um objeto completo, onde, com o cast simples das classes `CheckoutResponse` (para transações) ou `InvoiceResponse` (para solicitações de cobrança) permitirá o tratamento das propriedades do objeto de retorno de forma simplificada, sem a necessidade de criar os mesmos modelos em seu projeto.
+Após o envio, a própria chamada devolverá a resposta em um objeto completo com as propriedades desta, onde um cast das classes de resposta permitirá o tratamento das propriedades do objeto de retorno de forma simplificada, sem a necessidade de criar os mesmos modelos em seu projeto. Utilize a `CheckoutResponse` para transações ou `InvoiceResponse` para solicitações de cobrança.
 
 ```
 var checkout = new Checkout(config);
@@ -51,13 +51,15 @@ Console.WriteLine($"Transação {response.IdTransaction} gerada com sucesso!");
 
 ## Pagamentos / Transações
 
-Existem duas classes responsáveis pela geração e tratamentos de transações, `Checkout` e `Transaction`, onde cada uma possui os métodos disponíveis para cada .
+Existem duas classes responsáveis pela geração e tratamentos de transações, `Checkout` e `Transaction`, onde cada uma possui os métodos disponíveis para cada. **Sempre informando se a transação será em Sandbox ou em Produção**, correspondendo ao Token utilizado.
 
 O objeto esperado para uma transação deve seguir o modelo abaixo:
 
 ```
 var transaction = new Transaction<object>
 {
+	IsSandbox = true, //Definir com base no Token utilizado
+		
 	PaymentMethod = new PaymentMethod { Code = "CODIGO_DA_FORMA_DE_PAGAMENTO" },
 	PaymentObject = { /*CORPO DO OBJETO ESPERADO PARA A FORMA DE PAGAMENTO*/ };
 	Application = "NOME_DA_SUA_APLICAÇÃO",
@@ -278,7 +280,7 @@ Console.WriteLine($"Pagamento pendente. Por favor, acesse a página {response.Aut
 
 ## Solicitações de Cobrança / Vendas Rápidas
 
-Na classe `Invoice` estão os métodos disponíveis pela geração e tratamento de solicitações de cobrança.
+Na classe `Invoice` estão os métodos disponíveis pela geração e tratamento de solicitações de cobrança. **Solicitações de cobrança não podem ser geradas em Sandbox.**
 
 O objeto para uma nova venda deve ser montado seguindo o modelo abaixo:
 

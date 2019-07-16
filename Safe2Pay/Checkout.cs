@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Safe2Pay.Core;
+using Safe2Pay.Models;
 
 namespace Safe2Pay
 {
