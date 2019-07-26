@@ -15,8 +15,8 @@ namespace Safe2Pay.Models
         public string CallbackUrl { get; set; }
         public string SingleSaleUrl { get; set; }
         public string BankSplipUrl { get; set; }
-        public DateTime DueDate { get; set; }
-        public DateTime ExpirationDate { get; set; }
+        public DateTime? DueDate { get; set; }
+        public DateTime? ExpirationDate { get; set; }
         public DateTime CreatedDate { get; set; }
         public decimal Amount { get; set; }
         public decimal DiscountAmount { get; set; }
@@ -26,8 +26,9 @@ namespace Safe2Pay.Models
         public List<string> Messages { get; set; }
         public string Instruction { get; set; }
         public bool IsExcluded { get; set; }
+        public SingleSalePayment Payment { get; set; }
         public TransactionStatus TransactionStatus { get; set; }
-        public List<SingleSaleProduct> Products { get; set; }
+        public List<Product> Products { get; set; }
         public List<PaymentMethod> PaymentMethods { get; set; }
         public int ApiVersion { get; set; }
         public int IdSubscription { get; set; }

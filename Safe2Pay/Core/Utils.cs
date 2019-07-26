@@ -60,7 +60,7 @@ namespace Safe2Pay.Core
         }
 
         private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
-        { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore };
+            { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore };
 
         public static string Serialize(object data) => JsonConvert.SerializeObject(data, Settings);
 

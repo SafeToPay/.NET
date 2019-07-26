@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace Safe2Pay.Models
 {
@@ -25,5 +24,9 @@ namespace Safe2Pay.Models
         public bool IsEnablePartialPayment { get; set; }
         public int DaysBeforeCancel { get; set; }
         public int IdMerchant { get; set; }
+        public string Status { get; set; }
+        public decimal Amount { get; set; }
+        public string Description { get; set; }
+        public bool isCancelled { get; set; }
     }
 }

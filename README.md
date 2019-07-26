@@ -1,4 +1,3 @@
-
 # Safe2Pay .NET SDK
 
 ![Safe2Pay](https://safe2pay.com.br/static/img/banner-github.png)

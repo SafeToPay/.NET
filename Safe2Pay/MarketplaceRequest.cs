@@ -6,24 +6,24 @@ using Safe2Pay.Models;
 
 namespace Safe2Pay
 {
-    public class Marketplace
+    public class MarketplaceRequest
     {
+        private Client Client { get; }
+        
         /// <summary>
-        /// Construtor para as funções de transações
+        /// Construtor para as operações com Subcontas / Marketplace.
         /// </summary>
-        /// <param name="config">Dados de autenticação</param>
-        public Marketplace(Config config) => Client = new Client().Create(false, config);
-
-        private Client Client { get; set; }
+        /// <param name="config">Dados de autenticação na API.</param>
+        public MarketplaceRequest(Config config) => Client = new Client().Create(false, config);
 
         /// <summary>
-        /// Chamada para criar uma nova subconta.
+        /// Adicionar nova subconta.
         /// </summary>
-        /// <param name="merchant">Dados da empresa que será adicionada.</param>
+        /// <param name="merchant">Dados da empresa, com base na classe Merchant.</param>
         /// <returns></returns>
         public object New(object merchant)
         {
-            var response = Client.Post("Marketplace/Add", merchant);
+            var response = Client.Post("v2/Marketplace/Add", merchant);
 
             var responseObj = JsonConvert.DeserializeObject<Response<MarketplaceResponse>>(response);
             if (responseObj.HasError)
@@ -33,17 +33,17 @@ namespace Safe2Pay
         }
 
         /// <summary>
-        /// Consultar dados de subconta.
+        /// Consultar subconta.
         /// </summary>
-        /// <param name="id">Id gerado na criação da subconta. Também disponível na URL de consulta do painel administrativo.</param>
+        /// <param name="id">Código da subconta.</param>
         /// <returns></returns>
         public object Get(object id)
         {
-            var query = id is int
+            var query = id is int || id is string 
                 ? $"Id={id}"
                 : new FormUrlEncodedContent(id.ToQueryString()).ReadAsStringAsync().Result;
 
-            var response = Client.Get($"Marketplace/Get?{query}");
+            var response = Client.Get($"v2/Marketplace/Get?{query}");
 
             var responseObj = JsonConvert.DeserializeObject<Response<MarketplaceResponse>>(response);
             if (responseObj.HasError)
@@ -53,18 +53,18 @@ namespace Safe2Pay
         }
 
         /// <summary>
-        /// Atualizar dados de subconta.
+        /// Atualizar dados da subconta.
         /// </summary>
-        /// <param name="merchant">Dados que devem ser alterados</param>
-        /// <param name="id">Id gerado na criação da subconta. Também disponível na URL de consulta do painel administrativo.</param>
+        /// <param name="merchant">Dados que serão atualizados, com base na classe Merchant.</param>
+        /// <param name="id">Código da subconta que deve ser atualizada.</param>
         /// <returns></returns>
         public object Update(object merchant, object id)
         {
-            var query = id is int
+            var query = id is int || id is string 
                 ? $"Id={id}"
                 : new FormUrlEncodedContent(id.ToQueryString()).ReadAsStringAsync().Result;
 
-            var response = Client.Put($"Marketplace/Update?{query}", merchant);
+            var response = Client.Put($"v2/Marketplace/Update?{query}", merchant);
 
             var responseObj = JsonConvert.DeserializeObject<Response<MarketplaceResponse>>(response);
             if (responseObj.HasError)
@@ -74,18 +74,23 @@ namespace Safe2Pay
         }
 
         /// <summary>
-        /// Listar subcontas cadastradas no ambiente principal.
+        /// Listar subcontas.
         /// </summary>
+        /// <param name="pageNumber">Número da página da listagem.</param>
+        /// <param name="rowsPerPage">Número de itens por página.</param>
         /// <returns></returns>
-        public object List()
+        public object List(int pageNumber = 1, int rowsPerPage = 10)
         {
-            var query = new Filter<Merchant> { PageNumber = 1, RowsPerPage = 100 };
-            var encodedQuery = new FormUrlEncodedContent(query.ToQueryString());
-            var queryString = encodedQuery.ReadAsStringAsync().Result;
+            var query = new Filter<Merchant>
+            {
+                PageNumber = pageNumber, 
+                RowsPerPage = rowsPerPage
+            };
+            var queryString = new FormUrlEncodedContent(query.ToQueryString()).ReadAsStringAsync().Result;
 
-            var response = Client.Get($"Marketplace/List?{queryString}");
+            var response = Client.Get($"v2/Marketplace/List?{queryString}");
 
-            var responseObj = JsonConvert.DeserializeObject<Response<Object<MarketplaceResponse>>>(response);
+            var responseObj = JsonConvert.DeserializeObject<Response<MarketplaceResponse>>(response);
             if (responseObj.HasError)
                 throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
 
@@ -95,15 +100,15 @@ namespace Safe2Pay
         /// <summary>
         /// Excluir subconta.
         /// </summary>
-        /// <param name="id">Id gerado na criação da subconta. Também disponível na URL de consulta do painel administrativo.</param>
+        /// <param name="id">Código da subconta que deve ser excluída.</param>
         /// <returns></returns>
         public bool Delete(object id)
         {
-            var query = id is int
+            var query = id is int || id is string 
                 ? $"Id={id}"
                 : new FormUrlEncodedContent(id.ToQueryString()).ReadAsStringAsync().Result;
 
-            var response = Client.Delete($"Marketplace/Delete?{query}");
+            var response = Client.Delete($"v2/Marketplace/Delete?{query}");
 
             var responseObj = JsonConvert.DeserializeObject<Response<object>>(response);
             if (responseObj.HasError)

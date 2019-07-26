@@ -2,7 +2,6 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace Safe2Pay.Core
@@ -29,38 +28,19 @@ namespace Safe2Pay.Core
         private Client _paymentClient;
         private Client _mainClient;
 
-        /// <summary>
-        /// Configuração do cliente.
-        /// </summary>
-        /// <param name="payment">Valor booleano para definir se a chamada é para pagamento</param>
-        /// <param name="config">Parâmetros de autenticação</param>
-        /// <returns></returns>
         public Client Create(bool payment, Config config)
         {
             if (!payment)
             {
-                _mainClient = _mainClient ?? new Client("https://api.safe2pay.com.br/v2/", config);
+                _mainClient = _mainClient ?? new Client("https://api.safe2pay.com.br/", config);
                 return _mainClient;
             }
 
-            _paymentClient = _paymentClient ?? new Client("https://payment.safe2pay.com.br/v2/", config);
+            _paymentClient = _paymentClient ?? new Client("https://payment.safe2pay.com.br/", config);
             return _paymentClient;
         }
 
         public void Dispose() => _client.Dispose();
-
-        //Serializar objeto de envio para JSON
-
-        private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
-        {
-            NullValueHandling = NullValueHandling.Ignore,
-            DefaultValueHandling = DefaultValueHandling.Ignore
-        };
-
-        private static StringContent Serialize(object data)
-            => new StringContent(JsonConvert.SerializeObject(data, Settings), Encoding.UTF8, "application/json");
-
-        //Chamadas síncronas
 
         public string Get(string url) =>
             _client.GetAsync(url).Result.Content.ReadAsStringAsync().Result;
@@ -74,18 +54,19 @@ namespace Safe2Pay.Core
         public string Delete(string url) =>
             _client.DeleteAsync(url).Result.Content.ReadAsStringAsync().Result;
 
-        //TODO: Implementar métodos assíncronos em todas as classes
+        //TODO: Implementar métodos assíncronos opcionais em todas as classes.
+        //public async Task<HttpResponseMessage> GetAsync(string url) => await _client.GetAsync(url).ConfigureAwait(false);
+        //public async Task<HttpResponseMessage> PostAsync(string url, object data) => await _client.PostAsync(url, Serialize(data)).ConfigureAwait(false);
+        //public async Task<HttpResponseMessage> PutAsync(string url, object data) => await _client.PutAsync(url, Serialize(data)).ConfigureAwait(false);
+        //public async Task<HttpResponseMessage> DeleteAsync(string url) => await _client.DeleteAsync(url).ConfigureAwait(false);
 
-        public async Task<HttpResponseMessage> GetAsync(string url) =>
-            await _client.GetAsync(url).ConfigureAwait(false);
+        private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings 
+            { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore };
 
-        public async Task<HttpResponseMessage> PostAsync(string url, object data) =>
-            await _client.PostAsync(url, Serialize(data)).ConfigureAwait(false);
+        private static StringContent Serialize(object data)
+            => new StringContent(JsonConvert.SerializeObject(data, Settings), Encoding.UTF8, "application/json");
 
-        public async Task<HttpResponseMessage> PutAsync(string url, object data) =>
-            await _client.PutAsync(url, Serialize(data)).ConfigureAwait(false);
+        public static T Deserialize<T>(string data) => JsonConvert.DeserializeObject<T>(data, Settings);
 
-        public async Task<HttpResponseMessage> DeleteAsync(string url) =>
-            await _client.DeleteAsync(url).ConfigureAwait(false);
     }
 }

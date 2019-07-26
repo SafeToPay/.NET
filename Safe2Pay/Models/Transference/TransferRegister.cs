@@ -24,6 +24,8 @@ namespace Safe2Pay.Models
         public DateTime CreatedDate { get; set; }
         public DateTime ChangedDate { get; set; }
         public string Validation { get; set; }
+        public List<BankingTransferOccurrenceReason> BankingTransferOccurrenceReason { get; set; }
         public int IdMerchantRequester { get; set; }
+        public int IdTransferRegisterLot { get; set; }
     }
 }

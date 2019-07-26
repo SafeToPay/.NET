@@ -15,26 +15,4 @@
         public State State { get; set; }
         public Country Country { get; set; }
     }
-
-    public class City
-    {
-        public int Id { get; set; }
-        public int IdState { get; set; }
-        public string CodeIBGE { get; set; }
-        public string Name { get; set; }
-    }
-
-    public class State
-    {
-        public int Id { get; set; }
-        public int IdCountry { get; set; }
-        public string Initials { get; set; }
-        public object Name { get; set; }
-    }
-
-    public class Country
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
 }

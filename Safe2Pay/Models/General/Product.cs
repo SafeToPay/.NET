@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Safe2Pay.Models
+﻿namespace Safe2Pay.Models
 {
     public class Product
     {

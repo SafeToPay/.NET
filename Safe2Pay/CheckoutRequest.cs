@@ -5,29 +5,24 @@ using Safe2Pay.Models;
 
 namespace Safe2Pay
 {
-    /// <summary>
-    /// <para>Usada para a geração de novas transações.</para>
-    /// Deve ser utilizada para o envio (POST) de um objeto com base nas opções de pagamento disponíveis:
-    /// Boleto Bancário (1), Cartão de Crédito (2), BitCoin (3), Cartão de Débito (4) ou Transferência Bancária (5).
-    /// </summary>
-    public class Checkout
+    public class CheckoutRequest
     {
-        /// <summary>
-        /// Construtor para as funções de pagamento
-        /// </summary>
-        /// <param name="config">Dados de autenticação</param>
-        public Checkout(Config config) => Client = new Client().Create(true, config);
-
-        private Client Client { get; set; }
+        private Client Client { get; }
 
         /// <summary>
-        /// Método para gerar uma nova transação por Boleto Bancário.
+        /// Construtor para as funções de Transação..
         /// </summary>
-        /// <param name="bankSlip">Objeto com base no modelo BankSlip, da classe Transaction.</param>
+        /// <param name="config">Dados de autenticação na API.</param>
+        public CheckoutRequest(Config config) => Client = new Client().Create(true, config);
+
+        /// <summary>
+        /// Geração de uma transação por Boleto Bancário.
+        /// </summary>
+        /// <param name="transaction">Objeto com base na classe Transaction<T>, do tipo BankSlip.</param>
         /// <returns></returns>
-        public object BankSlip(object bankSlip)
+        public object BankSlip(object transaction)
         {
-            var response = Client.Post("Payment", bankSlip);
+            var response = Client.Post("v2/Payment", transaction);
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
             if (responseObj.HasError)
@@ -37,13 +32,13 @@ namespace Safe2Pay
         }
 
         /// <summary>
-        /// Método para gerar uma nova transação por Carnê/Fatura.
+        /// Geração de uma transação por Boleto Bancário.
         /// </summary>
-        /// <param name="carnet">Objeto com base no modelo Carnet, da classe Transaction.</param>
+        /// <param name="carnet">Objeto com base na classe Transaction<T>, do tipo Carnet.</param>
         /// <returns></returns>
         public object Carnet(object carnet)
         {
-            var response = Client.Post("Carnet", carnet);
+            var response = Client.Post("v2/Carnet", carnet);
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
             if (responseObj.HasError)
@@ -53,17 +48,16 @@ namespace Safe2Pay
         }
 
         /// <summary>
-        /// Método para gerar uma nova transação por Carnê/Fatura em lote.
+        /// Geração de uma transação por Boleto Bancário.
         /// </summary>
-        /// <param name="carnet">Objeto com base no modelo CarnetLot, da classe Transaction.</param>
+        /// <param name="carnet">Objeto com base na classe CarnetLot.</param>
         /// <returns></returns>
         public object CarnetLot(object carnet)
         {
             var transactionCompressed = Utils.Compress(Utils.Serialize(carnet));
             var carnetLot = new CarnetLot { JsonGzip = transactionCompressed };
 
-            var response = Client.Post("CarnetAsync", carnetLot);
-            //var objDecompressed = Utils.Decompress(response);
+            var response = Client.Post("v2/CarnetAsync", carnetLot);
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
             if (responseObj.HasError)
@@ -73,13 +67,13 @@ namespace Safe2Pay
         }
 
         /// <summary>
-        /// Método para gerar uma nova transação por Cartão de Crédito.
+        /// Geração de uma transação por Boleto Bancário.
         /// </summary>
-        /// <param name="credit">Objeto com base no modelo CreditCard, da Transaction.</param>
+        /// <param name="transaction">Objeto com base na classe Transaction<T>, do tipo CreditCard.</param>
         /// <returns></returns>
-        public object Credit(object credit)
+        public object Credit(object transaction)
         {
-            var response = Client.Post("Payment", credit);
+            var response = Client.Post("v2/Payment", transaction);
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
             if (responseObj.HasError)
@@ -89,13 +83,13 @@ namespace Safe2Pay
         }
 
         /// <summary>
-        /// Método para tokenizar os dados de um cartão de crédito.
+        /// Geração de uma transação por Boleto Bancário.
         /// </summary>
-        /// <param name="card">Objeto com base no modelo CreditCard.</param>
+        /// <param name="transaction">Objeto com base na classe Transaction<T>, do tipo CryptoCoin.</param>
         /// <returns></returns>
-        public object Tokenize(object card)
+        public object CryptoCurrency(object transaction)
         {
-            var response = Client.Post("Token", card);
+            var response = Client.Post("v2/Payment", transaction);
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
             if (responseObj.HasError)
@@ -105,13 +99,13 @@ namespace Safe2Pay
         }
 
         /// <summary>
-        /// Método para gerar uma nova transação por Cartão de Débito.
+        /// Geração de uma transação por Boleto Bancário.
         /// </summary>
-        /// <param name="debit">Objeto com base no modelo DebitCard, da Transaction.</param>
+        /// <param name="transaction">Objeto com base na classe Transaction<T>, do tipo DebitCard.</param>
         /// <returns></returns>
-        public object Debit(object debit)
+        public object DebitCard(object transaction)
         {
-            var response = Client.Post("Payment", debit);
+            var response = Client.Post("v2/Payment", transaction);
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
             if (responseObj.HasError)
@@ -121,13 +115,29 @@ namespace Safe2Pay
         }
 
         /// <summary>
-        /// Método para gerar uma nova transação por Bitcoin.
+        /// Geração de uma transação por Boleto Bancário.
         /// </summary>
-        /// <param name="bitcoin">Objeto com base no modelo Bitcoin, da Transaction.</param>
+        /// <param name="debitAccount">Objeto com base na classe Transaction<T>, do tipo DebitAccount.</param>
         /// <returns></returns>
-        public object Bitcoin(object bitcoin)
+        public object DebitAccount(object debitAccount)
         {
-            var response = Client.Post("Payment", bitcoin);
+            var response = Client.Post("v2/Payment", debitAccount);
+
+            var responseObj = Utils.Deserialize<Response<CheckoutResponse>>(response);
+            if (responseObj.HasError)
+                throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
+
+            return responseObj.ResponseDetail;
+        }
+
+        /// <summary>
+        /// Geração de uma transação por Boleto Bancário.
+        /// </summary>
+        /// <param name="transferRegister">Objeto com base na classe TransferRegisterLot.</param>
+        /// <returns></returns>
+        public object Transfer(object transferRegister)
+        {
+            var response = Client.Post("v2/Transfer", transferRegister);
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
             if (responseObj.HasError)

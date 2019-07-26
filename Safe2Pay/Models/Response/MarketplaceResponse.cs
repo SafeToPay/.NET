@@ -16,13 +16,12 @@ namespace Safe2Pay.Models
         public string TechName { get; set; }
         public string TechIdentity { get; set; }
         public string TechEmail { get; set; }
-
-
         public string Token { get; set; }
         public string SecretKey { get; set; }
         public string TokenSandbox { get; set; }
         public string SecretKeySandbox { get; set; }
         public string SellerName { get; set; }
+        public object Voucher { get; set; }
         public string Logotipo { get; set; }
         public string ExtensionLogotipo { get; set; }
         public string UrlLogotipo { get; set; }
@@ -30,11 +29,12 @@ namespace Safe2Pay.Models
         public Address Address { get; set; }
         public MerchantConfiguration Configuration { get; set; }
         public List<MerchantSplit> MerchantSplit { get; set; }
+        public double YesterdayDeposit { get; set; }
+        public double TodayDeposit { get; set; }
+        public double TomorowDeposit { get; set; }
         public bool IsRemoved { get; set; }
 
-
-
-
-
+        public List<Merchant> Objects { get; set; }
+        public int TotalItems { get; set; }
     }
 }

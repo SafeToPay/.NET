@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
 
 namespace Safe2Pay.Models
 {
@@ -17,16 +15,6 @@ namespace Safe2Pay.Models
         public decimal InterestAmount { get; set; }
         public bool PayableAfterDue { get; set; }
         public bool IsEnablePartialPayment { get; set; }
-        public List<CarnetBankslip> BankSlips { get; set; }
-    }
-
-    public class CarnetBankslip
-    {
-        public int IdTransaction { get; set; }
-        public int IdMerchant { get; set; }
-        public decimal Amount { get; set; }
-        public DateTime DueDate { get; set; }
-        public string Instruction { get; set; }
-        public List<string> Message { get; set; }
+        public List<BankSlip> BankSlips { get; set; }
     }
 }
