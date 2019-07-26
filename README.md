@@ -50,6 +50,7 @@ Usando o Package Manager: `Install-Package Safe2Pay`.
 * Transferência bancária (`TransferRequest`)
     * Consulta e listagens
 
+
 ## Requisitos
 
 .NET Standard 1.1+ ou
@@ -387,7 +388,9 @@ var confirmation = invoice.Cancel(saleToCancel);
 if (confirmation) Console.WriteLine("Cobrança cancelada com sucesso!");
 ```
 
-## Informações adicionais / Contato
+## Histórico de versões / Informações adicionais / Contato
+
+**Changelog**: [clique aqui](https://github.com/SafeToPay/.NET/blob/master/CHANGELOG.md).
 
 A orientação sobre a utilização da API também está disponível na documentação de referência da API, [disponível aqui]([https://developers.safe2pay.com.br/](https://developers.safe2pay.com.br/)), porém salientamos que ela se encontra em atualização para a nova versão da API e, por isso, recomendamos a utilização do [pacote da galeria do NuGet](https://www.nuget.org/packages/Safe2Pay), para que você esteja sempre com a versão mais atualizada!
 
