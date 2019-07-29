@@ -2,13 +2,13 @@
 
 ![Safe2Pay](https://safe2pay.com.br/static/img/banner-github.png)
 
-##### Biblioteca de integraÁ„o em .NET para o [Safe2Pay](https://safe2pay.com.br/Safe2Pay/).
+##### Biblioteca de integra√ß√£o em .NET para o [Safe2Pay](https://safe2pay.com.br/).
 
-Recomendamos a utilizaÁ„o do pacote da galeria do NuGet, para manter-se com a vers„o mais atualizada da biblioteca, com todas as funcionalidades atuais e as que est„o por vir!
+Recomendamos a utiliza√ß√£o do [pacote da galeria do NuGet](https://www.nuget.org/packages/Safe2Pay/), para manter-se com a vers√£o mais atualizada da biblioteca, com todas as funcionalidades atuais e as que est√£o por vir!
 
-## InstalaÁ„o
+## Instala√ß√£o
 
-[![NuGet version](https://img.shields.io/nuget/vpre/Safe2Pay.svg?style=flat-square)](https://www.nuget.org/packages/Safe2Pay)
+[![NuGet version](https://img.shields.io/nuget/vpre/Safe2Pay.svg?style=flat-square)](https://www.nuget.org/packages/Safe2Pay/)
 
 Pelo Visual Studio, buscando por 'Safe2Pay'.
 
@@ -19,53 +19,51 @@ Usando o Package Manager: `Install-Package Safe2Pay`.
 ## Principais recursos
 
 * Conta-Corrente (`AccountRequest`)
-    * Consulta e atualizaÁ„o de dados banc·rios
-    * Detalhamento e calend·rio de recebimentos
-* TokenizaÁ„o de cart„o de crÈdito (`TokenRequest`)
-* **GeraÁ„o** de TransaÁıes (`CheckoutRequest`)
-    * Boleto banc·rio
-    * Cart„o de crÈdito e de dÈbito
+    * Consulta e atualiza√ß√£o de dados banc√°rios
+    * Detalhamento e calend√°rio de recebimentos
+* Tokeniza√ß√£o de cart√£o de cr√©dito (`TokenRequest`)
+* **Gera√ß√£o** de Transa√ß√µes (`CheckoutRequest`)
+    * Boleto banc√°rio
+    * Cart√£o de cr√©dito e de d√©bito
     * Criptomoedas
-    * DÈbito em conta
-    * GeraÁ„o de carnÍs e carnÍs em lote
-    * TransferÍncia banc·ria
-* **OperaÁıes** com TransaÁıes (`TransactionRequest`)
-    * Consulta de transaÁıes
-    * Listagem de transaÁıes
-    * Estorno de cart„o de crÈdito e cart„o de dÈbito
-    * LiberaÁ„o e cancelamento de boleto banc·rio
-    * Consulta e cancelamento de carnÍs
-* DÈbito em conta (`DebitAccountRequest`)
-    * Consulta e cancelamento de dÈbitos
-* SolicitaÁıes de cobranÁa (`InvoiceRequest`)
-    * GeraÁ„o, cancelamento e substituiÁ„o
+    * D√©bito em conta
+    * Gera√ß√£o de carn√™s e carn√™s em lote
+    * Transfer√™ncia banc√°ria
+* **Opera√ß√µes** com Transa√ß√µes (`TransactionRequest`)
+    * Consulta de transa√ß√µes
+    * Listagem de transa√ß√µes
+    * Estorno de cart√£o de cr√©dito e cart√£o de d√©bito
+    * Libera√ß√£o e cancelamento de boleto banc√°rio
+    * Consulta e cancelamento de carn√™s
+* D√©bito em conta (`DebitAccountRequest`)
+    * Consulta e cancelamento de d√©bitos
+* Solicita√ß√µes de cobran√ßa (`InvoiceRequest`)
+    * Gera√ß√£o, cancelamento e substitui√ß√£o
     * Consulta e listagem
     * Reenvio
-* Gest„o de Marketplace (`MarketplaceRequest`)
-    * Inclus„o, atualizaÁ„o e exclus„o de subcontas
+* Gest√£o de Marketplace (`MarketplaceRequest`)
+    * Inclus√£o, atualiza√ß√£o e exclus√£o de subcontas
     * Consulta e listagem de subcontas
-* Gest„o de Planos (`PlanRequest`) e Adesıes (`SubscriptionRequest`)
-    * Inclus„o e atualizaÁ„o de planos e adesıes
+* Gest√£o de Planos (`PlanRequest`) e Ades√µes (`SubscriptionRequest`)
+    * Inclus√£o e atualiza√ß√£o de planos e ades√µes
     * Consultas e listagens
-* TransferÍncia banc·ria (`TransferRequest`)
+* Transfer√™ncia banc√°ria (`TransferRequest`)
     * Consulta e listagens
 
 
 ## Requisitos
 
 .NET Standard 1.1+ ou
-
 .NET Framework 4.5+ ou
-
 .NET Core 1.0+
 
-## UtilizaÁ„o
+## Utiliza√ß√£o
 
-A integraÁ„o com a API do Safe2Pay se d· pelo modelo RESTful, de forma a realizar a transferÍncia segura e simplificada dos dados pelo formato JSON. Para facilitar o envio dos dados, deve-se montar um objeto para envio baseado nos modelos disponÌveis, com exemplos abaixo, e a prÛpria chamada do mÈtodo desejado realizar· o tratamento e convers„o deste objeto para JSON. 
+A integra√ß√£o com a API do Safe2Pay se d√° pelo modelo RESTful, de forma a realizar a transfer√™ncia segura e simplificada dos dados pelo formato JSON. Para facilitar o envio dos dados, deve-se montar um objeto para envio baseado nos modelos dispon√≠veis, com exemplos abaixo, e a pr√≥pria chamada do m√©todo desejado realizar√° o tratamento e convers√£o deste objeto para JSON. 
 
-### ConfiguraÁ„o
+### Configura√ß√£o
 
-Antes de iniciar a utilizaÁ„o da biblioteca, È necess·rio informar os dados b·sicos de autenticaÁ„o na API, **n„o esquecendo de utilizar o Token e da Secret Key correspondentes ao ambiente definido, se ProduÁ„o ou Sandbox**. Esta configuraÁ„o est· dentro da classe `Config` e complementar· a chamada da API com os dados da sua empresa e deve ser utilizada na inicializaÁ„o da classe com os mÈtodos desejados. Segue exemplo abaixo:
+Antes de iniciar a utiliza√ß√£o da biblioteca, √© necess√°rio informar os dados b√°sicos de autentica√ß√£o na API, **n√£o esquecendo de utilizar o Token e da Secret Key correspondentes ao ambiente definido, se Produ√ß√£o ou Sandbox**. Esta configura√ß√£o est√° dentro da classe `Config` e complementar√° a chamada da API com os dados da sua empresa e deve ser utilizada na inicializa√ß√£o da classe com os m√©todos desejados. Segue exemplo abaixo:
 
 ```
 var config = new Config(
@@ -73,18 +71,18 @@ var config = new Config(
     secret: "PREENCHA_COM_SUA_SECRET_KEY");
 
 var checkout = new Checkout(config);
-//UtilizaÁ„o dos mÈtodos da classe Checkout...
+//Utiliza√ß√£o dos m√©todos da classe Checkout...
 ```
 
 ### Tratamento das respostas da API
 
-ApÛs o envio, a prÛpria chamada devolver· a resposta em um objeto completo com as propriedades desta, onde um cast das classes de resposta permitir· o tratamento das propriedades do objeto de retorno de forma simplificada, sem a necessidade de criar os mesmos modelos em seu projeto. 
+Ap√≥s o envio, a pr√≥pria chamada devolver√° a resposta em um objeto completo com as propriedades desta, onde um cast das classes de resposta permitir√° o tratamento das propriedades do objeto de retorno de forma simplificada, sem a necessidade de criar os mesmos modelos em seu projeto. 
 
-* `AccountResponse` para operaÁıes com os mÈtodos de conta-corrente em `AccountRequest`;
-* `CheckoutResponse` para operaÁıes com transaÁıes em `CheckoutRequest`, `TransactionRequest`, `DebitAccountRequest`, `TransferRequest` ou `TokenRequest`;
-* `InvoiceResponse` para operaÁıes com solicitaÁıes de cobranÁa em `InvoiceRequest`;
-* `MarketplaceResponse` para operaÁıes de gest„o de subcontas/marketplaces em `MarketplaceRequest`;
-* `PlanResponse` e `SubscriptionResponse` para operaÁıes com planos `PlanRequest`  e/ou adesıes `SubscriptionRequest`;
+* `AccountResponse` para opera√ß√µes com os m√©todos de conta-corrente em `AccountRequest`;
+* `CheckoutResponse` para opera√ß√µes com transa√ß√µes em `CheckoutRequest`, `TransactionRequest`, `DebitAccountRequest`, `TransferRequest` ou `TokenRequest`;
+* `InvoiceResponse` para opera√ß√µes com solicita√ß√µes de cobran√ßa em `InvoiceRequest`;
+* `MarketplaceResponse` para opera√ß√µes de gest√£o de subcontas/marketplaces em `MarketplaceRequest`;
+* `PlanResponse` e `SubscriptionResponse` para opera√ß√µes com planos `PlanRequest`  e/ou ades√µes `SubscriptionRequest`;
 
 Exemplo:
 
@@ -92,12 +90,12 @@ Exemplo:
 var checkout = new CheckoutRequest(config);
 var response = (CheckoutResponse)checkout.Credit(transaction); 
 
-Console.WriteLine($"TransaÁ„o {response.IdTransaction} gerada com sucesso!");
+Console.WriteLine($"Transa√ß√£o {response.IdTransaction} gerada com sucesso!");
 ```
 
-## Pagamentos / TransaÁıes
+## Pagamentos / Transa√ß√µes
 
-O objeto esperado para uma transaÁ„o deve seguir o modelo abaixo:
+O objeto esperado para uma transa√ß√£o deve seguir o modelo abaixo:
 
 ```
 var transaction = new Transaction<object>
@@ -106,19 +104,19 @@ var transaction = new Transaction<object>
 		
 	PaymentMethod = new PaymentMethod { Code = "CODIGO_DA_FORMA_DE_PAGAMENTO" },
 	PaymentObject = { /*CORPO DO OBJETO ESPERADO PARA A FORMA DE PAGAMENTO*/ };
-	Application = "NOME_DA_SUA_APLICA«√O",
+	Application = "NOME_DA_SUA_APLICA√á√ÉO",
 	Vendor = "VENDEDOR",
-	Reference = "REFER NCIA",
+	Reference = "REFER√äNCIA",
 	CallbackUrl = "https://callbacks.exemplo.com/api/notify",
 	Customer = new Customer
 	{
-		Name = "Destinat·rio da TransaÁ„o",
-		Identity = "99999999999999", //CPF ou CNPJ do Destinat·rio
+		Name = "Destinat√°rio da Transa√ß√£o",
+		Identity = "99999999999999", //CPF ou CNPJ do Destinat√°rio
 		Email = "email@empresa.com.br",
 		Address = new Address
 		{
-			Street = "EndereÁo do Destinat·rio",
-			Number = "N˙mero 123",
+			Street = "Endere√ßo do Destinat√°rio",
+			Number = "N√∫mero 123",
 			District = "Bairro",
 			ZipCode = "99999999", 
 			CityName = "Porto Alegre",
@@ -134,19 +132,19 @@ var transaction = new Transaction<object>
 };
 ```
 
-A informaÁ„o da forma de pagamento È dada por meio da propriedade `PaymentMethod`, onde deve ser informado o cÛdigo correspondente ao mÈtodo desejado:
+A informa√ß√£o da forma de pagamento √© dada por meio da propriedade `PaymentMethod`, onde deve ser informado o c√≥digo correspondente ao m√©todo desejado:
 
 ```
-1 = Boleto banc·rio
-2 = Cart„o de crÈdito
+1 = Boleto banc√°rio
+2 = Cart√£o de cr√©dito
 3 = Criptomoedas
-4 = Cart„o de dÈbito
-10 = DÈbito em conta
+4 = Cart√£o de d√©bito
+10 = D√©bito em conta
 ```
 
-O retorno do envio da transaÁ„o trar· um status para esta. [Consulte todos os status disponÌveis nesta lista](https://developers.safe2pay.com.br/reference/transaction_info).
+O retorno do envio da transa√ß√£o trar√° um status para esta. [Consulte todos os status dispon√≠veis nesta lista](https://developers.safe2pay.com.br/reference/transaction_info).
 
-#### Boleto Banc·rio
+#### Boleto Banc√°rio
 
 ```
 var bankSlip = new Transaction<BankSlip>
@@ -154,46 +152,46 @@ var bankSlip = new Transaction<BankSlip>
 	PaymentMethod = new PaymentMethod { Code = "1" },
 	PaymentObject = new BankSlip
 	{
-		//OBRIGAT”RIO 
-		DueDate = new DateTime(2019, 07, 31), //Data de vencimento do Boleto Banc·rio
+		//OBRIGAT√ìRIO 
+		DueDate = new DateTime(2019, 07, 31), //Data de vencimento do Boleto Banc√°rio
 		
 		//OPCIONAIS
-		Message = new List<string> { "Mensagem 1", "Mensagem 2" }, //Mensagens (m·x. 10) que ser„o impressas no Boleto
-		Instruction = "InstruÁ„o", //Mensagem na ·rea de "InstruÁıes"
-		CancelAfterDue = true, //Se o boleto deve ser cancelado apÛs a data de vencimento
+		Message = new List<string> { "Mensagem 1", "Mensagem 2" }, //Mensagens (m√°x. 10) que ser√£o impressas no Boleto
+		Instruction = "Instru√ß√£o", //Mensagem na √°rea de "Instru√ß√µes"
+		CancelAfterDue = true, //Se o boleto deve ser cancelado ap√≥s a data de vencimento
 		IsEnablePartialPayment = false, //Se o boleto aceita pagamento diferente do valor de registro
 		InterestRate = 1m, //Valor da Taxa de Juros
 		PenaltyRate = 1m, //Valor da Multa
-		DaysBeforeCancel = 30 //Prazo para baixa do boleto apÛs o vencimento
+		DaysBeforeCancel = 30 //Prazo para baixa do boleto ap√≥s o vencimento
 	},
-	//DEMAIS DADOS DO OBJETO DA TRANSA«√O, CONFORME O MODELO ACIMA
+	//DEMAIS DADOS DO OBJETO DA TRANSA√á√ÉO, CONFORME O MODELO ACIMA
 };
 ```
 
-O mÈtodo `BankSlip` È o respons·vel pelo envio de uma transaÁ„o com boleto e est· na classe `Checkout`.
+O m√©todo `BankSlip` √© o respons√°vel pelo envio de uma transa√ß√£o com boleto e est√° na classe `Checkout`.
 
 ```
-var bankSlip = new Transaction<BankSlip> { /*CORPO DO OBJETO DA TRANSA«√O*/ };
+var bankSlip = new Transaction<BankSlip> { /*CORPO DO OBJETO DA TRANSA√á√ÉO*/ };
 
 var checkout = new CheckoutRequest(config);
 var response = (CheckoutResponse)checkout.BankSlip(bankSlip);
 
-Console.WriteLine($"TransaÁ„o {response.IdTransaction} gerada com sucesso.");
+Console.WriteLine($"Transa√ß√£o {response.IdTransaction} gerada com sucesso.");
 
-Console.WriteLine($"Pagamento pendente. Copie a linha digit·vel para realizar o pagamento do boleto: {response.DigitableLine}");
+Console.WriteLine($"Pagamento pendente. Copie a linha digit√°vel para realizar o pagamento do boleto: {response.DigitableLine}");
 //OU...
-Console.WriteLine($"Pagamento pendente. O link para download e impress„o do boleto È: {response.BankSlipUrl}");
+Console.WriteLine($"Pagamento pendente. O link para download e impress√£o do boleto √©: {response.BankSlipUrl}");
 ```
 
-#### Cart„o de CrÈdito
+#### Cart√£o de Cr√©dito
 
-Para realizar a tokenizaÁ„o dos dados do cart„o de crÈdito de um cliente, deve-se usar o mÈtodo `Tokenize`, em `TokenRequest`, que retorna uma string com o token gerado para posterior utilizaÁ„o segura em uma transaÁ„o.
+Para realizar a tokeniza√ß√£o dos dados do cart√£o de cr√©dito de um cliente, deve-se usar o m√©todo `Tokenize`, em `TokenRequest`, que retorna uma string com o token gerado para posterior utiliza√ß√£o segura em uma transa√ß√£o.
 
 ```
 var card = new CreditCard
 {
 	CardNumber = "4111111111111111",
-	Holder = "Titular do Cart„o",
+	Holder = "Titular do Cart√£o",
 	ExpirationDate = "12/2021",
 	SecurityCode = "999"
 };
@@ -204,7 +202,7 @@ var response = (CheckoutResponse)checkout.Tokenize(card);
 Console.WriteLine($"Token '{teste.Token}' criado com sucesso!");
 ```
 
-Formato do objeto de envio de uma transaÁ„o por cart„o de crÈdito:
+Formato do objeto de envio de uma transa√ß√£o por cart√£o de cr√©dito:
 
 ```
 var credit = new Transaction<CreditCard>
@@ -212,42 +210,42 @@ var credit = new Transaction<CreditCard>
 	PaymentMethod = new PaymentMethod { Code = "2" },
 	PaymentObject = new CreditCard
 	{
-		//OPCIONAL - N˙mero de vezes que a venda ser· parcelada
+		//OPCIONAL - N√∫mero de vezes que a venda ser√° parcelada
 		InstallmentQuantity = 3,
 
-		//Caso os dados do cart„o j· estejam tokenizados, informar apenas o token
-		Token = "INFORMAR_O_CART√O_TOKENIZADO"
+		//Caso os dados do cart√£o j√° estejam tokenizados, informar apenas o token
+		Token = "INFORMAR_O_CART√ÉO_TOKENIZADO"
 				
-		//Ou os dados completos do cart„o de crÈdito do cliente
+		//Ou os dados completos do cart√£o de cr√©dito do cliente
 		CardNumber = "4111111111111111",
-		Holder = "Titular do Cart„o",
+		Holder = "Titular do Cart√£o",
 		ExpirationDate = "12/2021",
 		SecurityCode = "999"
 	},
-	//DEMAIS DADOS DO OBJETO DA TRANSA«√O, CONFORME O MODELO ACIMA
+	//DEMAIS DADOS DO OBJETO DA TRANSA√á√ÉO, CONFORME O MODELO ACIMA
 };
 ```
 
-O mÈtodo `Credit` È o respons·vel pelo envio de uma transaÁ„o com cart„o de crÈdito e est· na classe `Checkout`:
+O m√©todo `Credit` √© o respons√°vel pelo envio de uma transa√ß√£o com cart√£o de cr√©dito e est√° na classe `Checkout`:
 
 ```
-var credit = new Transaction<CreditCard> { /*CORPO DO OBJETO DA TRANSA«√O*/ };
+var credit = new Transaction<CreditCard> { /*CORPO DO OBJETO DA TRANSA√á√ÉO*/ };
 
 var checkout = new CheckoutRequest(config);
 var response = (CheckoutResponse)checkout.Credit(credit);
 
-Console.WriteLine($"TransaÁ„o {response.IdTransaction} gerada com sucesso!");
+Console.WriteLine($"Transa√ß√£o {response.IdTransaction} gerada com sucesso!");
 
 Console.WriteLine(response.Status.Equals("3")
-	? $"TransaÁ„o {response.IdTransaction} autorizada!"
+	? $"Transa√ß√£o {response.IdTransaction} autorizada!"
 	: $"Ocorreu um erro: {response.Message}"); // Se status != 3, exibir a mensagem com o erro ocorrido
 ```
 
-Para realizar o estorno de uma transaÁ„o realizada por cart„o de crÈdito, deve-se utilizar o mÈtodo `RefundCredit`, dentro da classe `TransactionRequest`.
+Para realizar o estorno de uma transa√ß√£o realizada por cart√£o de cr√©dito, deve-se utilizar o m√©todo `RefundCredit`, dentro da classe `TransactionRequest`.
 
 ```
 var transaction = new TransactionRequest(config);
-var refund = transaction.RefundCredit(response.IdTransaction); //Utilizando a transaÁ„o anterior como exemplo
+var refund = transaction.RefundCredit(response.IdTransaction); //Utilizando a transa√ß√£o anterior como exemplo
 
 if (refund.isCancelled) Console.WriteLine("Estorno realizado com sucesso!");
 ```
@@ -258,27 +256,27 @@ if (refund.isCancelled) Console.WriteLine("Estorno realizado com sucesso!");
 var transaction = new Transaction<Bitcoin>
 {
 	PaymentMethod = new PaymentMethod { Code = "3" },
-	//DEMAIS DADOS DO OBJETO DA TRANSA«√O, CONFORME O MODELO ACIMA
+	//DEMAIS DADOS DO OBJETO DA TRANSA√á√ÉO, CONFORME O MODELO ACIMA
 };
 ```
-Para uma transaÁ„o por Bitcoin, basta informar o cÛdigo do mÈtodo de pagamento (`Code = "3"`). A propriedade `PaymentObject` **n„o È necess·ria**. 
+Para uma transa√ß√£o por Bitcoin, basta informar o c√≥digo do m√©todo de pagamento (`Code = "3"`). A propriedade `PaymentObject` **n√£o √© necess√°ria**. 
 
-O mÈtodo `Bitcoin` È o respons·vel pelo envio de uma transaÁ„o com Bitcoin e est· na classe `Checkout`.
+O m√©todo `Bitcoin` √© o respons√°vel pelo envio de uma transa√ß√£o com Bitcoin e est√° na classe `Checkout`.
 
 ```
-var bitcoin = new Transaction<Bitcoin> { /*CORPO DO OBJETO DA TRANSA«√O*/ };
+var bitcoin = new Transaction<Bitcoin> { /*CORPO DO OBJETO DA TRANSA√á√ÉO*/ };
 
 var checkout = new CheckoutRequest(config);
 var response = (CheckoutResponse)checkout.Bitcoin(bitcoin);
 
-Console.WriteLine($"TransaÁ„o {response.IdTransaction} gerada com sucesso.");
+Console.WriteLine($"Transa√ß√£o {response.IdTransaction} gerada com sucesso.");
 
-Console.WriteLine($"Pagamento pendente. Por favor, escaneie o cÛdigo da imagem {response.QrCode} para realizar o pagamento!");
+Console.WriteLine($"Pagamento pendente. Por favor, escaneie o c√≥digo da imagem {response.QrCode} para realizar o pagamento!");
 //OU...
-Console.WriteLine($"Pagamento pendente. Por favor, realizar o envio de {response.AmountBTC} BTC para o endereÁo {response.WalletAddress} para completar a transaÁ„o!");
+Console.WriteLine($"Pagamento pendente. Por favor, realizar o envio de {response.AmountBTC} BTC para o endere√ßo {response.WalletAddress} para completar a transa√ß√£o!");
 ```
 
-#### Cart„o de DÈbito
+#### Cart√£o de D√©bito
 
 ```
 var debit = new Transaction<DebitCard>
@@ -286,44 +284,44 @@ var debit = new Transaction<DebitCard>
 	PaymentMethod = new PaymentMethod { Code = "4" },
 	PaymentObject = new DebitCard
 	{
-		//Deve ser verdadeiro para a transaÁ„o ser finalizada no internet banking da InstituiÁ„o Banc·ria do cliente
+		//Deve ser verdadeiro para a transa√ß√£o ser finalizada no internet banking da Institui√ß√£o Banc√°ria do cliente
 		Authenticate = true,
 
-		//Dados completos do cart„o de dÈbito do cliente
+		//Dados completos do cart√£o de d√©bito do cliente
 		CardNumber = "4111111111111111",
-		Holder = "Titular do Cart„o",
+		Holder = "Titular do Cart√£o",
 		ExpirationDate = "12/2021",
 		SecurityCode = "999"
 	},
-	//DEMAIS DADOS DO OBJETO DA TRANSA«√O, CONFORME O MODELO ACIMA
+	//DEMAIS DADOS DO OBJETO DA TRANSA√á√ÉO, CONFORME O MODELO ACIMA
 };
 ```
 
-O mÈtodo `Debit` È o respons·vel pelo envio de uma transaÁ„o com cart„o de dÈbito e est· na classe `Checkout`:
+O m√©todo `Debit` √© o respons√°vel pelo envio de uma transa√ß√£o com cart√£o de d√©bito e est√° na classe `Checkout`:
 
 ```
-var debit = new Transaction<DebitCard> { /*CORPO DO OBJETO DA TRANSA«√O*/ };
+var debit = new Transaction<DebitCard> { /*CORPO DO OBJETO DA TRANSA√á√ÉO*/ };
 
 var checkout = new CheckoutRequest(config);
 var response = (CheckoutResponse)checkout.Debit(debit);
 
-Console.WriteLine($"TransaÁ„o {response.IdTransaction} gerada com sucesso!");
+Console.WriteLine($"Transa√ß√£o {response.IdTransaction} gerada com sucesso!");
 
-Console.WriteLine($"Pagamento pendente. Por favor, acesse a p·gina {response.AuthenticationUrl} para finalizar o pagamento atravÈs do Internet Banking de sua InstituiÁ„o Banc·ria!");
+Console.WriteLine($"Pagamento pendente. Por favor, acesse a p√°gina {response.AuthenticationUrl} para finalizar o pagamento atrav√©s do Internet Banking de sua Institui√ß√£o Banc√°ria!");
 ```
 
-Para realizar o estorno de uma transaÁ„o realizada por cart„o de crÈdito, deve-se utilizar o mÈtodo `RefundDebit`, dentro da classe `TransactionRequest`.
+Para realizar o estorno de uma transa√ß√£o realizada por cart√£o de cr√©dito, deve-se utilizar o m√©todo `RefundDebit`, dentro da classe `TransactionRequest`.
 
 ```
 var transaction = new TransactionRequest(config);
-var refund = transaction.RefundDebit(response.IdTransaction); //Utilizando a transaÁ„o anterior como exemplo
+var refund = transaction.RefundDebit(response.IdTransaction); //Utilizando a transa√ß√£o anterior como exemplo
 
 if (refund.isCancelled) Console.WriteLine("Estorno realizado com sucesso!");
 ```
 
-## SolicitaÁıes de CobranÁa / Vendas R·pidas
+## Solicita√ß√µes de Cobran√ßa / Vendas R√°pidas
 
-Na classe `InvoiceRequest` est„o os mÈtodos disponÌveis pela geraÁ„o e tratamento de solicitaÁıes de cobranÁa. **SolicitaÁıes de cobranÁa n„o podem ser geradas em Sandbox.**
+Na classe `InvoiceRequest` est√£o os m√©todos dispon√≠veis pela gera√ß√£o e tratamento de solicita√ß√µes de cobran√ßa. **Solicita√ß√µes de cobran√ßa n√£o podem ser geradas em Sandbox.**
 
 O objeto para uma nova venda deve ser montado seguindo o modelo abaixo:
 
@@ -332,13 +330,13 @@ var singleSale = new SingleSale
 {
     Customer = new Customer
     {
-        Name = "Destinat·rio da CobranÁa",
-        Identity = "01579286000174", //CPF ou CNPJ do Destinat·rio
+        Name = "Destinat√°rio da Cobran√ßa",
+        Identity = "01579286000174", //CPF ou CNPJ do Destinat√°rio
         Email = "email@empresa.com.br",
         Address = new Address
         {
-            Street = "EndereÁo do Destinat·rio",
-            Number = "N˙mero 123",
+            Street = "Endere√ßo do Destinat√°rio",
+            Number = "N√∫mero 123",
             District = "Bairro",
             ZipCode = "99999999",
             CityName = "Porto Alegre",
@@ -352,46 +350,46 @@ var singleSale = new SingleSale
         new Product {Code = "002", Description = "Produto 2", UnitPrice = 2.99M, Quantity = 2M},
         new Product {Code = "003", Description = "Produto 3", UnitPrice = 3.99M, Quantity = 3M}
     },
-    ExpirationDate = new DateTime(2019, 07, 10), //Data de expiraÁ„o da cobranÁa
+    ExpirationDate = new DateTime(2019, 07, 10), //Data de expira√ß√£o da cobran√ßa
     DiscountAmount = 10, //Valor do desconto, em Reais, caso exista
-    Instruction = "SolicitaÁ„o de cobranÁa pelos produtos 1, 2 e 3.",
+    Instruction = "Solicita√ß√£o de cobran√ßa pelos produtos 1, 2 e 3.",
     PaymentMethods = new List<PaymentMethod>
     {
         new PaymentMethod { CodePaymentMethod = "1" }, //Boleto
-        new PaymentMethod { CodePaymentMethod = "2" }, //CrÈdito
+        new PaymentMethod { CodePaymentMethod = "2" }, //Cr√©dito
         new PaymentMethod { CodePaymentMethod = "3" }, //Bitcoin
-        new PaymentMethod { CodePaymentMethod = "4" }, //DÈbito
+        new PaymentMethod { CodePaymentMethod = "4" }, //D√©bito
     },
-    DueDate = new DateTime(2019, 07, 10), //Vencimento do Boleto Banc·rio, caso  habilitado
-    InterestAmount = 2, //Valor dos Juros do Boleto Banc·rio, caso  habilitado
-    PenaltyAmount = 3, //Valor da Multa do Boleto Banc·rio, caso  habilitado
+    DueDate = new DateTime(2019, 07, 10), //Vencimento do Boleto Banc√°rio, caso  habilitado
+    InterestAmount = 2, //Valor dos Juros do Boleto Banc√°rio, caso  habilitado
+    PenaltyAmount = 3, //Valor da Multa do Boleto Banc√°rio, caso  habilitado
     Messages = new List<string> { "Mensagem 1", "Mensagem 2" },
-    Emails = new List<string> { "email1@empresa.com.br", "email2@company.com" } //E-mails para envio da cobranÁa
+    Emails = new List<string> { "email1@empresa.com.br", "email2@company.com" } //E-mails para envio da cobran√ßa
 };
 
 var invoice = new InvoiceRequest(config);
 var response = (InvoiceResponse)invoice.New(singleSale);
 
-Console.WriteLine($"SolicitaÁ„o {response.SingleSaleHash} gerada com sucesso!");
+Console.WriteLine($"Solicita√ß√£o {response.SingleSaleHash} gerada com sucesso!");
 Console.WriteLine($"Siga o link para realizar o pagamento: {response.SingleSaleUrl} ");
 ```
 
-Para realizar o cancelamento de uma solicitaÁ„o de cobranÁa, basta realizar uma chamada para o mÈtodo `Cancel`, informando o hash gerado para a solicitaÁ„o desejada. A resposta ser· um booleano com a confirmaÁ„o do cancelamento.
+Para realizar o cancelamento de uma solicita√ß√£o de cobran√ßa, basta realizar uma chamada para o m√©todo `Cancel`, informando o hash gerado para a solicita√ß√£o desejada. A resposta ser√° um booleano com a confirma√ß√£o do cancelamento.
 
 ```
-//Utilizando a resposta do mÈtodo anterior como vari·vel
+//Utilizando a resposta do m√©todo anterior como vari√°vel
 var saleToCancel = new SingleSale { SingleSaleHash = response.SingleSaleHash }; 
 
 var invoice = new InvoiceRequest(config);
 var confirmation = invoice.Cancel(saleToCancel);
 
-if (confirmation) Console.WriteLine("CobranÁa cancelada com sucesso!");
+if (confirmation) Console.WriteLine("Cobran√ßa cancelada com sucesso!");
 ```
 
-## HistÛrico de versıes / InformaÁıes adicionais / Contato
+## Hist√≥rico de vers√µes / Informa√ß√µes adicionais / Contato
 
 **Changelog**: [clique aqui](https://github.com/SafeToPay/.NET/blob/master/CHANGELOG.md).
 
-A orientaÁ„o sobre a utilizaÁ„o da API tambÈm est· disponÌvel na documentaÁ„o de referÍncia da API, [disponÌvel aqui]([https://developers.safe2pay.com.br/](https://developers.safe2pay.com.br/)), porÈm salientamos que ela se encontra em atualizaÁ„o para a nova vers„o da API e, por isso, recomendamos a utilizaÁ„o do [pacote da galeria do NuGet](https://www.nuget.org/packages/Safe2Pay), para que vocÍ esteja sempre com a vers„o mais atualizada!
+A orienta√ß√£o sobre a utiliza√ß√£o da API tamb√©m est√° dispon√≠vel na documenta√ß√£o de refer√™ncia da API, [dispon√≠vel aqui]([https://developers.safe2pay.com.br/](https://developers.safe2pay.com.br/)), por√©m salientamos que ela se encontra em atualiza√ß√£o para a nova vers√£o da API e, por isso, recomendamos a utiliza√ß√£o do [pacote da galeria do NuGet](https://www.nuget.org/packages/Safe2Pay), para que voc√™ esteja sempre com a vers√£o mais atualizada!
 
-Em caso de d˙vidas, [ficamos ‡ disposiÁ„o em nossos canais](https://safe2pay.com.br/contato) ou diretamente pelo e-mail <integracao@safe2pay.com.br>.
+Em caso de d√∫vidas, [ficamos √† disposi√ß√£o em nossos canais](https://safe2pay.com.br/contato) ou diretamente pelo e-mail <integracao@safe2pay.com.br>.
