@@ -9,7 +9,11 @@ Todas as mudanças e atualizações relevantes serão listadas neste documento, assi
 - [ ] Tratamento customizado de exceções;
 - [ ] Tratamento para quando a resposta excede o tempo limite de timeout.
 
-#### [1.0.6] - 26, Jul, 2019
+#### [1.0.8] - 26, Jul, 2019
+
+- Adicionada a classe `RetryHandler`, com a a utilização da biblioteca Polly, finalidade de tornar o HttpClient mais resiliente e ter um melhor recurso para o tratamento de falhas das chamadas.
+
+#### [1.0.7] - 26, Jul, 2019
 
 - Ajustes de nomenclatura de classes e métodos para fins de padronização;
 - Inclusão de classes para gestão de Planos (`PlanRequest` e `PlanResponse`) e Adesões (`SubscriptionRequest` e `SubscriptionResponse`);
@@ -18,7 +22,7 @@ Todas as mudanças e atualizações relevantes serão listadas neste documento, assi
 - Inclusão do método `ListByReference` em `TransactionRequest` para o consulta de transações pela referência;
 - Pequenos ajustes.
 
-#### [1.0.4 - 1.0.5] - 16, Jul, 2019
+#### [1.0.4 - 1.0.6] - 16, Jul, 2019
 
 - Retirada da necessidade do envio da propriedade `IsSandbox`  das configurações;
 - Padronizações em geral, namespaces corrigidos e definições;
@@ -38,4 +42,4 @@ Todas as mudanças e atualizações relevantes serão listadas neste documento, assi
 - `Config` para os dados de autenticação na API e do ambiente, se Sandbox ou Produção;
 - Métodos para a geração de transações disponíveis na classe `Checkout`;
 - Métodos para gestão de solicitações de cobrança em `Sales`;
-- Métodos para interações com transações em `Transactions`. 
+- Métodos para interações com transações em `Transactions`.

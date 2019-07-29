@@ -11,14 +11,10 @@ namespace Safe2Pay.Core
         private readonly HttpClient _client;
 
         public Client() { }
-
+        
         private Client(string baseUrl, Config config)
         {
-            _client = new HttpClient
-            {
-                BaseAddress = new Uri(baseUrl),
-                Timeout = new TimeSpan(0, 0, 0, config.Timeout)
-            };
+            _client = new HttpClient(new RetryHandler(new HttpClientHandler())) { BaseAddress = new Uri(baseUrl) };
 
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -39,8 +35,9 @@ namespace Safe2Pay.Core
             _paymentClient = _paymentClient ?? new Client("https://payment.safe2pay.com.br/", config);
             return _paymentClient;
         }
-
-        public void Dispose() => _client.Dispose();
+        
+        public void Dispose() => 
+            _client.Dispose();
 
         public string Get(string url) =>
             _client.GetAsync(url).Result.Content.ReadAsStringAsync().Result;
@@ -60,13 +57,13 @@ namespace Safe2Pay.Core
         //public async Task<HttpResponseMessage> PutAsync(string url, object data) => await _client.PutAsync(url, Serialize(data)).ConfigureAwait(false);
         //public async Task<HttpResponseMessage> DeleteAsync(string url) => await _client.DeleteAsync(url).ConfigureAwait(false);
 
-        private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings 
+        private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
             { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore };
 
         private static StringContent Serialize(object data)
             => new StringContent(JsonConvert.SerializeObject(data, Settings), Encoding.UTF8, "application/json");
 
-        public static T Deserialize<T>(string data) => JsonConvert.DeserializeObject<T>(data, Settings);
-
+        public static T Deserialize<T>(string data) => 
+            JsonConvert.DeserializeObject<T>(data, Settings);
     }
 }

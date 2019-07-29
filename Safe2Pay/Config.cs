@@ -2,7 +2,7 @@
 {
     public class Config
     {
-        public Config(string token, string secretKey, int timeout = 60)
+        public Config(string token, string secretKey, int timeout = 1)
         {
             Timeout = timeout;
             Token = token;
