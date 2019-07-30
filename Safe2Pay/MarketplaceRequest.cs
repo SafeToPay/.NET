@@ -27,7 +27,7 @@ namespace Safe2Pay
 
             var responseObj = JsonConvert.DeserializeObject<Response<MarketplaceResponse>>(response);
             if (responseObj.HasError)
-                throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
+                throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
 
             return responseObj.ResponseDetail;
         }
@@ -47,7 +47,7 @@ namespace Safe2Pay
 
             var responseObj = JsonConvert.DeserializeObject<Response<MarketplaceResponse>>(response);
             if (responseObj.HasError)
-                throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
+                throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
 
             return responseObj.ResponseDetail;
         }
@@ -68,7 +68,7 @@ namespace Safe2Pay
 
             var responseObj = JsonConvert.DeserializeObject<Response<MarketplaceResponse>>(response);
             if (responseObj.HasError)
-                throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
+                throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
 
             return responseObj.ResponseDetail;
         }
@@ -92,7 +92,7 @@ namespace Safe2Pay
 
             var responseObj = JsonConvert.DeserializeObject<Response<MarketplaceResponse>>(response);
             if (responseObj.HasError)
-                throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
+                throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
 
             return responseObj.ResponseDetail.Objects;
         }
@@ -112,7 +112,7 @@ namespace Safe2Pay
 
             var responseObj = JsonConvert.DeserializeObject<Response<object>>(response);
             if (responseObj.HasError)
-                throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
+                throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
 
             return (bool)responseObj.ResponseDetail;
         }

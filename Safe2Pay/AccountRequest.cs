@@ -27,7 +27,7 @@ namespace Safe2Pay
 
             var responseObj = JsonConvert.DeserializeObject<Response<AccountResponse>>(response);
             if (responseObj.HasError)
-                throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
+                throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
 
             return responseObj.ResponseDetail;
         }
@@ -59,7 +59,7 @@ namespace Safe2Pay
             
             //var response = Client.Put($"v2/MerchantBankData/Update", bankData);
             //var responseObj = JsonConvert.DeserializeObject<Response<AccountResponse>>(response);
-            //if (responseObj.HasError) throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
+            //if (responseObj.HasError) throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
 
             return true;
         }
@@ -74,7 +74,7 @@ namespace Safe2Pay
 
             var responseObj = JsonConvert.DeserializeObject<Response<AccountResponse>>(response);
             if (responseObj.HasError)
-                throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
+                throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
 
             return responseObj.ResponseDetail;
         }
@@ -98,7 +98,7 @@ namespace Safe2Pay
 
             var responseObj = JsonConvert.DeserializeObject<Response<AccountResponse>>(response);
             if (responseObj.HasError)
-                throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
+                throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
 
             return true;
         }
@@ -113,7 +113,7 @@ namespace Safe2Pay
 
             var responseObj = JsonConvert.DeserializeObject<Response<AccountResponse>>(response);
             if (responseObj.HasError)
-                throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
+                throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
 
             return responseObj.ResponseDetail;
         }
@@ -137,7 +137,7 @@ namespace Safe2Pay
 
             var responseObj = JsonConvert.DeserializeObject<Response<List<AccountResponse>>>(response);
             if (responseObj.HasError)
-                throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
+                throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
 
             return responseObj.ResponseDetail;
         }
@@ -163,7 +163,7 @@ namespace Safe2Pay
 
             var responseObj = JsonConvert.DeserializeObject<Response<AccountResponse>>(response);
             if (responseObj.HasError)
-                throw new Exception($"Erro {responseObj.ErrorCode} - {responseObj.Error}");
+                throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
 
             return responseObj.ResponseDetail;
         }

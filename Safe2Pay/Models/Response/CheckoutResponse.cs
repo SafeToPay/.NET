@@ -41,6 +41,9 @@ namespace Safe2Pay.Models
         //public int Status { get; set; }
         //public string Message { get; set; }
         public CreditCard CreditCard { get; set; }
+        public string CardNumber { get; set; }
+        public string Brand { get; set; }
+        public string Installments { get; set; }
 
         //CryptoCurrency
         //public string IdTransaction { get; set; }
@@ -50,6 +53,8 @@ namespace Safe2Pay.Models
         public string QrCode { get; set; }
         public string Symbol { get; set; }
         public decimal AmountBTC { get; set; }
+        public decimal AmountLTC { get; set; }
+        public decimal AmountBCH { get; set; }
         public string WalletAddress { get; set; }
 
         //DebitCard
