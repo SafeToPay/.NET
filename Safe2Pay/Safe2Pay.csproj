@@ -25,7 +25,6 @@ Construído em .NET Standard 1.1, também compatível com .NET Framework 4.5+ e 
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="Polly" Version="7.1.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 

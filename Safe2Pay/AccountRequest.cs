@@ -119,6 +119,36 @@ namespace Safe2Pay
         }
 
         /// <summary>
+        /// Consultar valores disponíveis para antecipação de recebíveis.
+        /// </summary>
+        /// <returns></returns>
+        public object AdvancePaymentSimulation()
+        {
+            var response = Client.Get("v2/CheckingAccount/AdvancePaymentSimulation");
+
+            var responseObj = JsonConvert.DeserializeObject<Response<AccountResponse>>(response);
+            if (responseObj.HasError)
+                throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
+
+            return responseObj.ResponseDetail;
+        }
+
+        /// <summary>
+        /// Solicitar valores disponíveis para antecipação de recebíveis.
+        /// </summary>
+        /// <returns></returns>
+        public object AdvancePaymentRequest()
+        {
+            var response = Client.Get("v2/CheckingAccount/AdvancePaymentRequest");
+
+            var responseObj = JsonConvert.DeserializeObject<Response<AccountResponse>>(response);
+            if (responseObj.HasError)
+                throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
+
+            return responseObj.ResponseDetail;
+        }
+
+        /// <summary>
         /// Listar depósitos dentro de um período específico.
         /// </summary>
         /// <param name="initialDate">Data inicial.</param>

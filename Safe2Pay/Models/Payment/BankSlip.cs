@@ -28,7 +28,6 @@ namespace Safe2Pay.Models
         public decimal Amount { get; set; }
         public string Description { get; set; }
         public bool isCancelled { get; set; }
-
         public string OperationDate { get; set; }
         public string BankName { get; set; }
         public string CodeBank { get; set; }
@@ -36,5 +35,8 @@ namespace Safe2Pay.Models
         public string Agency { get; set; }
         public string Account { get; set; }
         public string CodeAssignor { get; set; }
+        public int? DiscountType { get; set; }
+        public decimal DiscountAmount { get; set; }
+        public DateTime? DiscountDue { get; set; }
     }
 }

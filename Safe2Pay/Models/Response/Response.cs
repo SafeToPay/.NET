@@ -1,18 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System.Net;
 
 namespace Safe2Pay.Models
 {
-    public class Response<T>
+    public class Response : IResponse
     {
-        public bool HasError { get; set; }
+        public HttpStatusCode StatusCode { get; set; }
+        public bool HasError => Error != null;
         public string ErrorCode { get; set; }
         public string Error { get; set; }
+    }
+
+    public class Response<T> : Response, IResponse<T>
+    {
         public T ResponseDetail { get; set; }
     }
 
-    public class Object<T> where T : new()
+    public interface IResponse<T> : IResponse
     {
-        public List<T> Objects { get; set; }
-        public int TotalItems { get; set; }
+        T ResponseDetail { get; set; }
+    }
+
+    public interface IResponse
+    {
+        HttpStatusCode StatusCode { get; set; }
+        bool HasError { get; }
+        string ErrorCode { get; set; }
+        string Error { get; set; }
     }
 }

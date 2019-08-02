@@ -58,5 +58,13 @@ namespace Safe2Pay.Models
         public string SelectDate { get; set; }
         public List<CheckingAccount> Objects { get; set; }
         public int TotalItems { get; set; }
+
+        //
+        public decimal AmountReceivables { get; set; }
+        public decimal AmountNetReceivables { get; set; }
+        //public decimal Tax { get; set; }
+        public bool IsFunds { get; set; }
+        public string Message { get; set; }
+
     }
 }

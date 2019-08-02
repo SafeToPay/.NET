@@ -26,7 +26,7 @@ namespace Safe2Pay.Models
         public int SubscriptionTotal { get; set; }
         public object Status { get; set; }
 
-        public List<Plan> Objects { get; set; }
+        public List<PlanResponse> Objects { get; set; }
         public int TotalItems { get; set; }
     }
 }

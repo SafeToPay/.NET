@@ -34,7 +34,7 @@ namespace Safe2Pay.Models
         public double TomorowDeposit { get; set; }
         public bool IsRemoved { get; set; }
 
-        public List<Merchant> Objects { get; set; }
+        public List<MarketplaceResponse> Objects { get; set; }
         public int TotalItems { get; set; }
     }
 }

@@ -137,26 +137,20 @@ namespace Safe2Pay.Models
         public object PaymentInfo { get; set; }
         public object CardBrand { get; set; }
         public int ApiVersion { get; set; }
-        public List<Transaction<object>> Objects { get; set; }
+        public List<CheckoutResponse> Objects { get; set; }
         public int TotalItems { get; set; }
-
-
-        //Refund
         public bool isCancelled { get; set; }
         //public string Message { get; set; }
-
-        //CancelCarnet
         //public List<BankSlip> BankSlips { get; set; }
-
-        //GetCarnetLot
         public bool IsProcessed { get; set; }
         //public string Message { get; set; }
         public string IdentifierLot { get; set; }
-
-        //CancelCarnetLot
         //public bool IsExcluded { get; set; }
         //public string Message { get; set; }
-        
         #endregion
     }
+
+
+
+
 }

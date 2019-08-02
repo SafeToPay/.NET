@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Polly;
 
 namespace Safe2Pay.Core
 {
