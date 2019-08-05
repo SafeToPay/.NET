@@ -34,7 +34,7 @@ namespace Safe2Pay
             {
                 var response = Client.Post("v2/Payment", transaction);
 
-                var responseObj = JsonConvert.DeserializeObject<Response<Transaction<object>>>(response);
+                var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
                 if (responseObj.HasError)
                     throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
 
@@ -236,7 +236,7 @@ namespace Safe2Pay
             {
                 var response = Client.Post("v2/Payment", transaction);
 
-                var responseObj = JsonConvert.DeserializeObject<Response<Transaction<object>>>(response);
+                var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
                 if (responseObj.HasError)
                     throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
 
