@@ -55,49 +55,26 @@ namespace Safe2Pay
                             IdTransaction = ((Base)returnReference).Id,
                             Status = ((Base)returnReference).TransactionStatus.Code,
                             Message = ((Base)returnReference).TransactionStatus.Name,
-                            Description =
-                                "Estamos aguardando o pagamento do boleto bancário. Após o pagamento, o boleto poderá levar até 2 dias úteis para ser compensado.",
-                            BankSlipNumber =
-                                JObject.Parse(
-                                    JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))[
-                                    "BankSlipNumber"]?.ToString(),
-                            DueDate = JObject.Parse(
-                                JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))[
-                                "DueDate"]?.ToString(),
-                            DigitableLine =
-                                JObject.Parse(
-                                    JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))[
-                                    "DigitableLine"]?.Value<string>(),
-                            Barcode = JObject.Parse(
-                                JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))[
-                                "Barcode"]?.Value<string>(),
-                            BankSlipUrl =
-                                JObject.Parse(
-                                    JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))[
-                                    "BankSplipUrl"]?.Value<string>(),
-                            OperationDate =
-                                JObject.Parse(
-                                    JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))[
-                                    "OperationDate"]?.Value<string>(),
-                            BankName = JObject.Parse(
-                                JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))[
-                                "BankName"]?.Value<string>(),
-                            CodeBank = JObject.Parse(
-                                JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))[
-                                "CodeBank"]?.Value<string>(),
-                            Wallet = JObject.Parse(
-                                JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))[
-                                "Wallet"]?.Value<string>(),
-                            Agency = JObject.Parse(
-                                JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))[
-                                "Agency"]?.Value<string>(),
-                            Account = JObject.Parse(
-                                JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))[
-                                "Account"]?.Value<string>(),
-                            CodeAssignor =
-                                JObject.Parse(
-                                    JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))[
-                                    "CodeAssignor"]?.Value<string>()
+                            Description = "Estamos aguardando o pagamento do boleto bancário. Após o pagamento, o boleto poderá levar até 2 dias úteis para ser compensado.",
+                            BankSlipNumber = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["BankSlipNumber"]?.ToString(),
+                            DueDate = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["DueDate"]?.ToString(),
+                            DigitableLine = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["DigitableLine"]?.Value<string>(),
+                            Barcode = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["Barcode"]?.Value<string>(),
+                            BankSlipUrl = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["BankSplipUrl"]?.Value<string>(),
+                            OperationDate = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["OperationDate"]?.Value<string>(),
+                            BankName = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["BankName"]?.Value<string>(),
+                            CodeBank = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["CodeBank"]?.Value<string>(),
+                            Wallet = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["Wallet"]?.Value<string>(),
+                            Agency = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["Agency"]?.Value<string>(),
+                            Account = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["Account"]?.Value<string>(),
+                            CodeAssignor = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["CodeAssignor"]?.Value<string>(),
+                            WalletDescription = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["WalletDescription"]?.Value<string>(),
+                            AgencyDV = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["AgencyDV"]?.Value<string>(),
+                            AccountDV = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["AccountDV"]?.Value<string>(),
+                            DocType = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["DocType"]?.Value<string>(),
+                            Accept = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["Accept"]?.Value<string>(),
+                            GuarantorName = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["GuarantorName"]?.Value<string>(),
+                            GuarantorIdentity = JObject.Parse(JsonConvert.SerializeObject(((Transaction<object>)returnReference).PaymentObject))["GuarantorIdentity"]?.Value<string>(),
                         };
                     }
                 }

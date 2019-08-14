@@ -1,11 +1,19 @@
-﻿namespace Safe2Pay
+﻿using Safe2Pay.Core;
+
+namespace Safe2Pay
 {
     public class Config
     {
-        public Config(string token, string secretKey, int timeout = 60)
+        public Config(string token, string secret = null, int timeout = 60)
         {
+            if (string.IsNullOrEmpty(token))
+                throw new Safe2PayException("O Token é obrigatório!");
+
+            if (timeout < 15)
+                throw new Safe2PayException("O tempo definido para timeout é muito baixo! É recomendável mantê-lo acima de pelo menos 15 segundos.");
+
             Token = token;
-            SecretKey = secretKey;
+            SecretKey = secret;
             Timeout = timeout;
         }
 

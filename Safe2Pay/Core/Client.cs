@@ -37,17 +37,13 @@ namespace Safe2Pay.Core
             return _paymentClient;
         }
         
-        public string Get(string url) => 
-            _client.GetAsync(url).Result.Content.ReadAsStringAsync().Result;
+        public string Get(string url) => _client.GetAsync(url).Result.Content.ReadAsStringAsync().Result;
         
-        public string Post(string url, object data) => 
-            _client.PostAsync(url, Serialize(data)).Result.Content.ReadAsStringAsync().Result;
+        public string Post(string url, object data) => _client.PostAsync(url, Serialize(data)).Result.Content.ReadAsStringAsync().Result;
 
-        public string Put(string url, object data) => 
-            _client.PutAsync(url, Serialize(data)).Result.Content.ReadAsStringAsync().Result;
+        public string Put(string url, object data) => _client.PutAsync(url, Serialize(data)).Result.Content.ReadAsStringAsync().Result;
 
-        public string Delete(string url) => 
-            _client.DeleteAsync(url).Result.Content.ReadAsStringAsync().Result;
+        public string Delete(string url) => _client.DeleteAsync(url).Result.Content.ReadAsStringAsync().Result;
 
         private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
             { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore };

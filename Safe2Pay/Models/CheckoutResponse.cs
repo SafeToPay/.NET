@@ -24,6 +24,13 @@ namespace Safe2Pay.Models
         public string Agency { get; set; }
         public string Account { get; set; }
         public string CodeAssignor { get; set; }
+        public string WalletDescription { get; set; }
+        public string AgencyDV { get; set; }
+        public string AccountDV { get; set; }
+        public string DocType { get; set; }
+        public string Accept { get; set; }
+        public string GuarantorName { get; set; }
+        public string GuarantorIdentity { get; set; }
 
         //Carnet
         public string CarnetUrl { get; set; }
@@ -149,8 +156,4 @@ namespace Safe2Pay.Models
         //public string Message { get; set; }
         #endregion
     }
-
-
-
-
 }
