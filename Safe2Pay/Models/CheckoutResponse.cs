@@ -30,6 +30,7 @@ namespace Safe2Pay.Models
         public string DocType { get; set; }
         public string Accept { get; set; }
         public string GuarantorName { get; set; }
+        public string GuarantorIdentity { get; set; }
         public decimal? AdditionPayment { get; set; }
         public decimal? DiscountPayment { get; set; }
 
