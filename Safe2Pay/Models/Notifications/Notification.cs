@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Safe2Pay.Models
 {
-    class Notification
+    public class Notification
     {
         public int IdTransaction { get; set; }
-        public int IdMerchant { get; set; }
         public TransactionStatus TransactionStatus { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
+        public List<CheckingAccount> CheckingAccounts { get; set; }
         public string Application { get; set; }
         public string Vendor { get; set; }
         public decimal Amount { get; set; }
@@ -18,7 +19,8 @@ namespace Safe2Pay.Models
         public decimal? TaxValue { get; set; }
         public decimal? NetValue { get; set; }
         public decimal? PaidValue { get; set; }
+        public decimal? AdditionValue { get; set; }
+        public decimal? DiscountValue { get; set; }
         public string Reference { get; set; }
-        public string NotificationUrl { get; set; }
     }
 }

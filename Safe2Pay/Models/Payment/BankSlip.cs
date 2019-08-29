@@ -38,5 +38,7 @@ namespace Safe2Pay.Models
         public int? DiscountType { get; set; }
         public decimal DiscountAmount { get; set; }
         public DateTime? DiscountDue { get; set; }
+        public decimal? AdditionPayment { get; set; }
+        public decimal? DiscountPayment { get; set; }
     }
 }
