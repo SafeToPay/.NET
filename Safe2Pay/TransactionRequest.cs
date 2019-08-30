@@ -45,14 +45,7 @@ namespace Safe2Pay
         /// <returns></returns>
         public object List(int pageNumber = 1, int rowsPerPage = 10)
         {
-            var filter = new Filter<Transaction<object>>
-            {
-                PageNumber = pageNumber,
-                RowsPerPage = rowsPerPage
-            };
-            var query = new FormUrlEncodedContent(filter.ToQueryString()).ReadAsStringAsync().Result;
-
-            var response = Client.Get($"v2/Transaction/Reference?{query}");
+            var response = Client.Get($"v2/Transaction/List?PageNumber={pageNumber}&RowsPerPage={rowsPerPage}");
 
             var responseObj = JsonConvert.DeserializeObject<Response<CheckoutResponse>>(response);
             if (responseObj.HasError)

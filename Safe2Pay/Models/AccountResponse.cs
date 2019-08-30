@@ -7,7 +7,7 @@ namespace Safe2Pay.Models
     {
         //MerchantBankData/Get
         public int Id { get; set; }
-        public Bank Bank { get; set; }
+        public dynamic Bank { get; set; }
         public AccountType AccountType { get; set; }
         public string BankAgency { get; set; }
         public string BankAgencyDigit { get; set; }

@@ -43,7 +43,7 @@ namespace Safe2Pay
         /// <param name="accountDigit">Dígito da conta.</param>
         /// <param name="operation">Tipo de operação.</param>
         /// <returns></returns>
-        public object UpdateBankData(string bankCode, string bankAgency, string agencyDigit, string bankAccount, string accountDigit, string operation)
+        public bool UpdateBankData(string bankCode, string bankAgency, string agencyDigit, string bankAccount, string accountDigit, string operation)
         {
             var bankData = new BankData
             {
@@ -79,14 +79,13 @@ namespace Safe2Pay
             return responseObj.ResponseDetail;
         }
 
-        //TODO: Método com resposta vazia no retorno da API, porém o PUT é efetuado normalmente. Será ajustado para melhor tratamento da resposta.
         /// <summary>
         /// Atualizar frequência de recebimento.
         /// </summary>
         /// <param name="planFrequence">Frequência do recebimento. 1 = Uma vez por mês. 6 = Uma vez por semana.7 = Todos os dias.</param>
         /// <param name="paymentDay">Dia para recebimento. Se = 1, informar o número do dia desejado para recebimento. Se = 6, informar de 2 a 6 para definir de segunda a sexta. Se = 7, não enviar paymentDay.</param>
         /// <returns></returns>
-        public object UpdatePaymentDate(int planFrequence = 7, int paymentDay = 0)
+        public bool UpdatePaymentDate(int planFrequence = 7, int paymentDay = 0)
         {
             var frequency = new MerchantPaymentDate
             {
@@ -94,12 +93,8 @@ namespace Safe2Pay
                 PaymentDay = paymentDay
             };
 
-            var response = Client.Put($"v2/MerchantPaymentDate/Update", frequency);
-
-            var responseObj = JsonConvert.DeserializeObject<Response<AccountResponse>>(response);
-            if (responseObj.HasError)
-                throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
-
+            Client.Put($"v2/MerchantPaymentDate/Update", frequency);
+            
             return true;
         }
 

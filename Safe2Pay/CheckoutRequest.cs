@@ -349,22 +349,6 @@ namespace Safe2Pay
         }
 
         /// <summary>
-        /// Geração de uma transação por Boleto Bancário.
-        /// </summary>
-        /// <param name="debitAccount">Objeto com base na classe Transaction<T>, do tipo DebitAccount.</param>
-        /// <returns></returns>
-        public object DebitAccount(object debitAccount)
-        {
-            var response = Client.Post("v2/Payment", debitAccount);
-
-            var responseObj = Utils.Deserialize<Response<CheckoutResponse>>(response);
-            if (responseObj.HasError)
-                throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
-
-            return responseObj.ResponseDetail;
-        }
-
-        /// <summary>
         /// Geração de uma transação por Transferência Bancária.
         /// </summary>
         /// <param name="transferRegister">Objeto com base na classe TransferRegisterLot.</param>

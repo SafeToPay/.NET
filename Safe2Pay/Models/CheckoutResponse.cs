@@ -119,12 +119,12 @@ namespace Safe2Pay.Models
         //Detail / List / ListByReference
         public int Id { get; set; }
         public dynamic PaymentObject { get; set; }
-        public PaymentMethod PaymentMethod { get; set; }
+        public dynamic PaymentMethod { get; set; }
         public TransactionStatus TransactionStatus { get; set; }
         public Gateway Gateway { get; set; }
         public Merchant Merchant { get; set; }
         public TaxType TaxType { get; set; }
-        public Customer Customer { get; set; }
+        public CustomerResponse Customer { get; set; }
         public decimal Amount { get; set; }
         public decimal TaxValue { get; set; }
         public object Currency { get; set; }
@@ -147,6 +147,10 @@ namespace Safe2Pay.Models
         public object CardBrand { get; set; }
         public int ApiVersion { get; set; }
         public List<CheckoutResponse> Objects { get; set; }
+
+
+
+
         public int TotalItems { get; set; }
         public bool isCancelled { get; set; }
         //public string Message { get; set; }

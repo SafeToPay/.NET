@@ -7,9 +7,9 @@ namespace Safe2Pay.Models
     {
         public int Id { get; set; }
         public Merchant Merchant { get; set; }
-        public Customer Customer { get; set; }
+        public CustomerResponse Customer { get; set; }
         public int IdTransaction { get; set; }
-        public int Status { get; set; }
+        public string Status { get; set; }
         public string SingleSaleHash { get; set; }
         public string Reference { get; set; }
         public string CallbackUrl { get; set; }
@@ -33,4 +33,27 @@ namespace Safe2Pay.Models
         public int ApiVersion { get; set; }
         public int IdSubscription { get; set; }
     }
+
+    public class CustomerResponse
+    {
+        public int Id { get; set; }
+        public Merchant Merchant { get; set; }
+        public string Name { get; set; }
+        public string Identity { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public AddressResponse Address { get; set; }
+    }
+    public class AddressResponse
+    {
+        public string ZipCode { get; set; }
+        public string Street { get; set; }
+        public string Number { get; set; }
+        public string Complement { get; set; }
+        public string District { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Country { get; set; }
+    }
+
 }
