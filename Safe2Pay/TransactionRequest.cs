@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Reflection;
 using Newtonsoft.Json;
@@ -51,7 +52,7 @@ namespace Safe2Pay
             if (responseObj.HasError)
                 throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
 
-            return responseObj.ResponseDetail;
+            return responseObj.ResponseDetail.Objects;
         }
 
         /// <summary>
