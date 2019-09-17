@@ -1,11 +1,11 @@
-﻿namespace Safe2Pay.Models
+﻿namespace Safe2Pay.Response
 {
-    public class Customer
+    public class CustomerResponse
     {
         public string Name { get; set; }
         public string Identity { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public Address Address { get; set; }
+        public AddressResponse Address { get; set; }
     }
 }

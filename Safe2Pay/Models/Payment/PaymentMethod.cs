@@ -6,7 +6,6 @@
         public string Code { get; set; }
         public string Name { get; set; }
 
-        //Para Invoice
         public string CodePaymentMethod { get; set; }
     }
 }

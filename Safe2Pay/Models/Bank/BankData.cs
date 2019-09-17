@@ -3,6 +3,7 @@
     public class BankData
     {
         public Bank Bank { get; set; }
+        public AccountType AccountType { get; set; }
         public string BankAgency { get; set; }
         public string BankAgencyDigit { get; set; }
         public string BankAccount { get; set; }

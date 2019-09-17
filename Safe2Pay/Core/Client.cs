@@ -2,56 +2,79 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace Safe2Pay.Core
 {
     internal class Client
     {
-        private readonly HttpClient _client;
+        private static HttpClient _client;
+        private static JsonSerializerSettings _settings;
+        private static Uri _baseUri;
 
-        public Client() { }
-
-        private Client(string baseUrl, Config config)
+        internal Client(Config config)
         {
-            _client = new HttpClient
-                { BaseAddress = new Uri(baseUrl), Timeout = TimeSpan.FromSeconds(config.Timeout) };
+            _settings = new JsonSerializerSettings
+                { DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore };
+
+            _client = new HttpClient(new HttpClientHandler())
+                { BaseAddress = _baseUri, Timeout = TimeSpan.FromSeconds(config.Timeout) };
 
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _client.DefaultRequestHeaders.Add("X-API-KEY", config.Token);
         }
 
-        private Client _paymentClient;
-        private Client _mainClient;
-
-        public Client Create(bool payment, Config config)
+        private static HttpClient CreateClient(bool payment)
         {
-            if (!payment)
+            _baseUri = payment
+                ? new Uri("https://payment.safe2pay.com.br/")
+                : new Uri("https://api.safe2pay.com.br/");
+
+            return _client;
+        }
+
+        private static async Task<T> Send<T>(HttpMethod method, bool payment, string endpoint, object data = null)
+        {
+            var client = CreateClient(payment);
+
+            var request = new HttpRequestMessage(method, _baseUri + endpoint);
+
+            if (method == HttpMethod.Post || method == HttpMethod.Put)
+                request.Content = new StringContent(JsonConvert.SerializeObject(data, _settings), Encoding.UTF8, "application/json");
+
+            var response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+
+            return await Process<T>(response);
+        }
+
+        private static async Task<T> Process<T>(HttpResponseMessage response)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+
+            T result = default;
+
+            if (response.Content.Headers.ContentType.MediaType == "application/json")
             {
-                _mainClient = _mainClient ?? new Client("https://api.safe2pay.com.br/", config);
-                return _mainClient;
+                var responseObj = JsonConvert.DeserializeObject<Response<T>>(content, _settings);
+
+                if (responseObj.HasError)
+                    throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);
+
+                result = responseObj.ResponseDetail;
             }
 
-            _paymentClient = _paymentClient ?? new Client("https://payment.safe2pay.com.br/", config);
-            return _paymentClient;
+            return result;
         }
-        
-        public string Get(string url) => _client.GetAsync(url).Result.Content.ReadAsStringAsync().Result;
-        
-        public string Post(string url, object data) => _client.PostAsync(url, Serialize(data)).Result.Content.ReadAsStringAsync().Result;
 
-        public string Put(string url, object data) => _client.PutAsync(url, Serialize(data)).Result.Content.ReadAsStringAsync().Result;
+        internal static async Task<T> Get<T>(bool payment, string url) => await Send<T>(HttpMethod.Get, payment, url);
 
-        public string Delete(string url) => _client.DeleteAsync(url).Result.Content.ReadAsStringAsync().Result;
+        internal static async Task<T> Post<T>(bool payment, string url, object data) => await Send<T>(HttpMethod.Post, payment, url, data);
 
-        private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
-            { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore };
+        internal static async Task<T> Put<T>(bool payment, string url, object data) => await Send<T>(HttpMethod.Put, payment, url, data);
 
-        private static StringContent Serialize(object data)
-            => new StringContent(JsonConvert.SerializeObject(data, Settings), Encoding.UTF8, "application/json");
-
-        public static T Deserialize<T>(string data) =>
-            JsonConvert.DeserializeObject<T>(data, Settings);
+        internal static async Task<T> Delete<T>(bool payment, string url) => await Send<T>(HttpMethod.Delete, payment, url);
     }
 }
