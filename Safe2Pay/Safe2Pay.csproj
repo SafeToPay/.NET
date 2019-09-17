@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.1</TargetFramework>
-    <Authors>Cliente de Teste</Authors>
+    <Authors>Safe2Pay</Authors>
     <Company>Safe2Pay Intermediações de Pagamentos Ltda.</Company>
     <Version>1.1.0</Version>
     <PackageIconUrl>https://safe2pay.com.br/static/card-share-checkout.png</PackageIconUrl>
