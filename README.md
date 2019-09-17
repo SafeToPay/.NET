@@ -32,7 +32,7 @@ Esta configuração está disponível inicializando a classe `Safe2Pay`, que con
 Safe2Pay safe2pay = new Safe2Pay(
     token: "PREENCHA_COM_SEU_TOKEN",
     secret: "PREENCHA_COM_SUA_SECRET_KEY", //Opcional
-	timeout: 30); //Opcional
+    timeout: 30); //Opcional
 
 var transaction = /*CONSTRUÇÃO DO OBJETO DE UMA TRANSAÇÃO COM CARTÃO DE CRÉDITO...*/
 
@@ -41,7 +41,7 @@ var checkout = safe2pay.Payment.Credit(transaction);
 
 ### Principais recursos
 
-* Tokenização de cartão de crédito (`TokenRequest`)
+* Tokenização de cartão de crédito (`Token`)
 * Transações (`Payment`)
     * Boleto bancário
     * Cartão de crédito 
