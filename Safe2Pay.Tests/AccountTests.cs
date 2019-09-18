@@ -9,7 +9,6 @@ namespace Safe2Pay.Tests
         private static readonly Safe2Pay safe2pay = new Safe2Pay("TOKEN", "SECRET", 30);
 
         [Test]
-        [Description("Consultar dados bancários.")]
         public void Get_Bank_Data()
         {
             var response = safe2pay.Account.GetBankData();
@@ -24,7 +23,6 @@ namespace Safe2Pay.Tests
         }
 
         [Test]
-        [Description("Consultar saldo de recebíveis.")]
         public void Get_Balance()
         {
             var response = safe2pay.Account.GetBalance();
@@ -40,53 +38,6 @@ namespace Safe2Pay.Tests
         }
 
         [Test]
-        [Description("Consultar saldo de recebíveis disponíveis para antecipação.")]
-        public void Advance_Payment_Simulation()
-        {
-            var response = safe2pay.Account.AdvancePaymentSimulation();
-
-            Assert.IsNotNull(response);
-
-            Console.WriteLine(response.AmountReceivables);
-            Console.WriteLine(response.AmountNetReceivables);
-            Console.WriteLine(response.Tax);
-            Console.WriteLine(response.Items.Count);
-
-            foreach (var items in response.Items)
-            {
-                Console.WriteLine(" --- ");
-
-                Console.WriteLine(items.Id);
-                Console.WriteLine(items.Description);
-                Console.WriteLine(items.InstallmentQuantity);
-
-                Console.WriteLine(" --- ");
-            }
-        }
-
-        [Test]
-        [Description("Solicitar antecipação de recebíveis.")]
-        public void Advance_Payment_Request()
-        {
-            var response = safe2pay.Account.AdvancePaymentRequest();
-
-            Assert.IsNotNull(response);
-            Assert.That(response.Message == "Antecipação efetuada com sucesso.");
-
-            foreach (var items in response.Items)
-            {
-                Console.WriteLine(" --- ");
-                
-                Console.WriteLine(items.Id);
-                Console.WriteLine(items.Description);
-                Console.WriteLine(items.InstallmentQuantity);
-
-                Console.WriteLine(" --- ");
-            }
-        }
-
-        [Test]
-        [Description("Listar depósitos realizados e futuros no mês corrente.")]
         public void List_Deposits()
         {
             var response = safe2pay.Account.ListDeposits();
@@ -113,7 +64,6 @@ namespace Safe2Pay.Tests
         }
 
         [Test]
-        [Description("Detalhar depósito diário.")]
         public void List_Period()
         {
             var response = safe2pay.Account.DetailDayDeposits();

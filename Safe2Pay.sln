@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safe2Pay", "Safe2Pay\Safe2Pay.csproj", "{C8B78C0B-BA0C-46E6-B354-7BA20341542C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safe2Pay.Tests", "..\Safe2Pay\Safe2Pay.Tests\Safe2Pay.Tests.csproj", "{3DE76837-9E27-42C7-B161-40EA0B786BA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safe2Pay.Tests", "Safe2Pay.Tests\Safe2Pay.Tests.csproj", "{B1839503-273D-4E72-9225-D0C9A4D5CA17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{C8B78C0B-BA0C-46E6-B354-7BA20341542C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8B78C0B-BA0C-46E6-B354-7BA20341542C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8B78C0B-BA0C-46E6-B354-7BA20341542C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3DE76837-9E27-42C7-B161-40EA0B786BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3DE76837-9E27-42C7-B161-40EA0B786BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3DE76837-9E27-42C7-B161-40EA0B786BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3DE76837-9E27-42C7-B161-40EA0B786BA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1839503-273D-4E72-9225-D0C9A4D5CA17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1839503-273D-4E72-9225-D0C9A4D5CA17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1839503-273D-4E72-9225-D0C9A4D5CA17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1839503-273D-4E72-9225-D0C9A4D5CA17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
