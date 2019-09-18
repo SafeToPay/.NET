@@ -1,4 +1,4 @@
-﻿namespace Safe2Pay.Models
+﻿namespace Safe2Pay.Response
 {
     public class BankDataResponse
     {

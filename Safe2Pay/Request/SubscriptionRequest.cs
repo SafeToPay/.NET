@@ -1,7 +1,7 @@
 ﻿using Safe2Pay.Core;
 using Safe2Pay.Models;
 
-namespace Safe2Pay
+namespace Safe2Pay.Request
 {
     public class SubscriptionRequest
     {

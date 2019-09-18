@@ -29,10 +29,10 @@ Antes de iniciar a utilização da biblioteca, é necessário informar os dados 
 Esta configuração está disponível inicializando a classe `Safe2Pay`, que contém todas as classes e métodos disponíveis pela biblioteca de integração.
 
 ```
-Safe2Pay safe2pay = new Safe2Pay(
-    token: "PREENCHA_COM_SEU_TOKEN",
-    secret: "PREENCHA_COM_SUA_SECRET_KEY", //Opcional
-    timeout: 30); //Opcional
+Safe2Pay safe2pay = new Safe2Pay_Request(
+  token: "PREENCHA_COM_SEU_TOKEN",
+  secret: "PREENCHA_COM_SUA_SECRET_KEY", //Opcional
+  timeout: 30); //Opcional
 
 var transaction = /*CONSTRUÇÃO DO OBJETO DE UMA TRANSAÇÃO COM CARTÃO DE CRÉDITO...*/
 

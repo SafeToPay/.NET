@@ -4,7 +4,7 @@
     <TargetFramework>netstandard1.1</TargetFramework>
     <Authors>Safe2Pay</Authors>
     <Company>Safe2Pay Intermediações de Pagamentos Ltda.</Company>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <PackageIconUrl>https://safe2pay.com.br/static/card-share-checkout.png</PackageIconUrl>
     <PackageProjectUrl>https://safe2pay.com.br/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SafeToPay/</RepositoryUrl>
@@ -19,8 +19,9 @@ Construído em .NET Standard 1.1, também compatível com .NET Framework 4.5+ e 
     <PackageTags></PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
-    <AssemblyVersion>1.1.0</AssemblyVersion>
-    <FileVersion>1.1.0</FileVersion>
+    <AssemblyVersion>1.1.1</AssemblyVersion>
+    <FileVersion>1.1.1</FileVersion>
+    <RootNamespace>Safe2Pay</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

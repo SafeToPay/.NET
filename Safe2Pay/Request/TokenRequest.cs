@@ -2,7 +2,7 @@
 using Safe2Pay.Models;
 using Safe2Pay.Response;
 
-namespace Safe2Pay
+namespace Safe2Pay.Request
 {
     public class TokenRequest
     {

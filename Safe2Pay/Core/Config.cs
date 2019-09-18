@@ -1,6 +1,4 @@
-﻿using Safe2Pay.Core;
-
-namespace Safe2Pay
+﻿namespace Safe2Pay.Core
 {
     public class Config
     {

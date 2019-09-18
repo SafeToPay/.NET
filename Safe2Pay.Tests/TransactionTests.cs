@@ -6,7 +6,7 @@ namespace Safe2Pay.Tests
     [TestFixture]
     public class TransactionTests
     {
-        private static readonly Safe2Pay safe2pay = new Safe2Pay("TOKEN", "SECRET", 30);
+        private static readonly Safe2Pay_Request safe2pay = new Safe2Pay_Request("TOKEN", "SECRET", 30);
 
         [Test]
         public void Get_Transaction()

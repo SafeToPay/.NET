@@ -1,8 +1,9 @@
 ﻿using Safe2Pay.Core;
+using Safe2Pay.Request;
 
 namespace Safe2Pay
 {
-    public class Safe2Pay
+    public class Safe2Pay_Request
     {
         private readonly Client client;
         private readonly Config config;
@@ -18,7 +19,7 @@ namespace Safe2Pay
         public readonly TransferRequest Transfer;
         public readonly TransactionRequest Transaction;
 
-        private Safe2Pay(Config config)
+        private Safe2Pay_Request(Config config)
         {
             this.config = config;
             client = new Client(config);
@@ -35,7 +36,7 @@ namespace Safe2Pay
             Transaction = new TransactionRequest(this.config);
         }
 
-        public Safe2Pay(string token, string secret = null, int timeout = 60) : this(new Config(token, secret, timeout))
+        public Safe2Pay_Request(string token, string secret = null, int timeout = 60) : this(new Config(token, secret, timeout))
         {
             if (string.IsNullOrEmpty(token)) 
                 throw new Safe2PayException("O Token é obrigatório!");

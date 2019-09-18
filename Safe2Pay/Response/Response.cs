@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Safe2Pay.Core
+namespace Safe2Pay.Response
 {
     internal class Response<T>  
     {
