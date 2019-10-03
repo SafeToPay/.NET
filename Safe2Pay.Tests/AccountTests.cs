@@ -23,77 +23,55 @@ namespace Safe2Pay.Tests
         }
 
         [Test]
-        public void Get_Balance()
-        {
-            var response = safe2pay.Account.GetBalance();
-
-            Assert.IsNotNull(response);
-
-            Console.WriteLine(response.AmountReceived);
-            Console.WriteLine(response.AmountPreview);
-            Console.WriteLine(response.AmountCanceled);
-            Console.WriteLine(response.AmountContestation);
-            Console.WriteLine(response.AmountTaxes);
-            Console.WriteLine(response.AmountAvailableToday);
-        }
-
-        [Test]
         public void List_Deposits()
         {
-            var response = safe2pay.Account.ListDeposits();
+            var response = safe2pay.Account.GetListDeposits(5,2019);
 
             Assert.IsNotNull(response);
 
-            Console.WriteLine(response.Count);
+            Console.WriteLine(response.Deposits.Count);
 
-            foreach (var items in response)
+            foreach (var items in response.Deposits)
             {
                 Console.WriteLine(" --- ");
-                
-                Console.WriteLine(items.Amount);
-                Console.WriteLine(items.Tax);
-                Console.WriteLine(items.IsTransferred);
-                Console.WriteLine(items.IsToday);
-                Console.WriteLine(items.ReleaseDate);
-                Console.WriteLine(items.CreatedDate);
-                Console.WriteLine(items.InstallmentNumber);
-                Console.WriteLine(items.InstallmentQuantity);
 
+                Console.WriteLine(items.Amount);
+                Console.WriteLine(items.DepositDate);
+                Console.WriteLine(items.IsTransferred);
+                Console.WriteLine(items.Message);
+                Console.WriteLine(items.Tax);
+                Console.WriteLine(items.TotalItems);
                 Console.WriteLine(" --- ");
             }
         }
 
         [Test]
-        public void List_Period()
+        public void Get_ListDetailsDeposits()
         {
-            var response = safe2pay.Account.DetailDayDeposits();
+            var response = safe2pay.Account.GetListDetailsDeposits(new DateTime(2019, 9, 17), 1, 10);
 
             Assert.IsNotNull(response);
 
-            Console.WriteLine(response.TotalAmountDay);
-            Console.WriteLine(response.IsReceived);
-            Console.WriteLine(response.TotalTax);
-            Console.WriteLine(response.TotalChargeback);
-            Console.WriteLine(response.SelectDate);
+            Console.WriteLine(response.Amount);
+            Console.WriteLine(response.DepositDate);
+            Console.WriteLine(response.IsTransferred);
+            Console.WriteLine(response.Message);
+            Console.WriteLine(response.Tax);
+            Console.WriteLine(response.TotalItems);
 
-            Console.WriteLine(response.Objects.Count);
 
-            foreach (var items in response.Objects)
+            foreach (var items in response.Extracts)
             {
                 Console.WriteLine(" --- ");
-                
-                Console.WriteLine(items.IdTransaction);
-                Console.WriteLine(items.Description);
-                Console.WriteLine(items.Reference);
-                Console.WriteLine(items.Amount);
-                Console.WriteLine(items.Tax);
-                Console.WriteLine(items.IsTransferred);
-                Console.WriteLine(items.IsToday);
-                Console.WriteLine(items.ReleaseDate);
-                Console.WriteLine(items.CreatedDate);
-                Console.WriteLine(items.InstallmentNumber);
-                Console.WriteLine(items.InstallmentQuantity);
 
+                Console.WriteLine(items.Amount);
+                Console.WriteLine(items.Description);
+                Console.WriteLine(items.IdTransaction);           
+                Console.WriteLine(items.InstallmentCurrent);     
+                Console.WriteLine(items.InstallmentQuantity);
+                Console.WriteLine(items.Reference);
+                Console.WriteLine(items.Tax);
+                Console.WriteLine(items.PaymentMethod.Name);
                 Console.WriteLine(" --- ");
             }
         }

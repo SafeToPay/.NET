@@ -25,30 +25,16 @@ namespace Safe2Pay.Request
         }
 
         /// <summary>
-        /// Consultar os totalizadores de recebíveis do mês corrente.
-        /// </summary>
-        public CheckingAccountBalance GetBalance()
-        {
-            return Client.Get<CheckingAccountBalance>(false, "v2/CheckingAccount/GetBalance").GetAwaiter().GetResult();
-        }
-
-        /// <summary>
         /// Listar depósitos realizados e pendentes dentro de um período específico.
         /// Se não for passado nenhum parâmetro, retorno será o calendário de depósitos do mês corrente.
         /// </summary>
         /// <param name="initialDate">Data inicial. Se não informado, valor padrão será o primeiro dia do mês atual.</param>
         /// <param name="endDate">Data final. Se não informado, valor padrão será o último dia do mês atual.</param>
-        public List<CheckingAccount> ListDeposits(DateTime? initialDate = null, DateTime? endDate = null)
+        public CheckingAccountDeposit GetListDeposits(int Mouth, int Year)
         {
-            if (!initialDate.HasValue) 
-                initialDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            
-            if (!endDate.HasValue) 
-                endDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
-
-            return Client.Get<List<CheckingAccount>>(false, $"v2/CheckingAccount/List?InitialDate={initialDate:yyyy-MM-dd}&EndDate={endDate:yyyy-MM-dd}").GetAwaiter().GetResult();
+       
+            return Client.Get<CheckingAccountDeposit>(false, $"v2/CheckingAccount/GetListDeposits?month={Mouth}&year={Year}").GetAwaiter().GetResult();
         }
-
         /// <summary>
         /// Detalhar os lançamentos realizados na data.
         /// Se não for passado nenhum parâmetro, retorno será o detalhamento de transações do depósito referentes ao dia atual.
@@ -56,12 +42,16 @@ namespace Safe2Pay.Request
         /// <param name="initialDate">Data inicial. Se não informado, valor padrão será o dia atual.</param>
         /// <param name="pageNumber">Número da página da listagem.</param>
         /// <param name="rowsPerPage">Número de itens por página.</param>
-        public CheckingAccountList DetailDayDeposits(DateTime? initialDate = null, int pageNumber = 1, int rowsPerPage = 10)
+        public Deposit GetListDetailsDeposits(DateTime? DepositDateRes = null, int pageNumber = 1, int rowsPerPage = 10)
         {
-            if (!initialDate.HasValue) 
-                initialDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-            
-            return Client.Get<CheckingAccountList>(false, $"v2/CheckingAccount/ListPeriod?InitialDate={initialDate:yyyy-MM-dd}&PageNumber={pageNumber}&RowsPerPage={rowsPerPage}").GetAwaiter().GetResult();
+            DateTime depositDate = new DateTime();
+
+            if (DepositDateRes == null || DepositDateRes == DateTime.MinValue)
+                depositDate = DateTime.Now;
+            else
+                depositDate = (DateTime)DepositDateRes;
+
+            return Client.Get<Deposit>(false, $"v2/CheckingAccount/GetListDetailsDeposits?day={depositDate.Date.Day}&month={depositDate.Date.Month}&year={depositDate.Date.Year}&page={pageNumber}&rowsPerPage={rowsPerPage}").GetAwaiter().GetResult();
         }
     }
 }

@@ -4,8 +4,13 @@ namespace Safe2Pay.Models
 {
     public class CheckingAccount
     {
-        public int IdTransaction { get; set; }
+        public int Id { get; set; }
+        public Merchant Merchant { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
+        public TransferStatus TransferStatus { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public int IdTransaction { get; set; }
         public string Description { get; set; }
         public string Reference { get; set; }
         public decimal Amount { get; set; }
