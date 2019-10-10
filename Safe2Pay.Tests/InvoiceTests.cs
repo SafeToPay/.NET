@@ -8,7 +8,7 @@ namespace Safe2Pay.Tests
     [TestFixture]
     public class InvoiceTests
     {
-        private static readonly Safe2Pay_Request safe2pay = new Safe2Pay_Request("TOKEN", "SECRET", 30);
+        private static readonly Safe2Pay_Request safe2pay = new Safe2Pay_Request("x-api-key", "SECRET", 30);
 
         [Test]
         public void New()
@@ -49,8 +49,18 @@ namespace Safe2Pay.Tests
                 {
                     new PaymentMethod { CodePaymentMethod = "1" },
                     new PaymentMethod { CodePaymentMethod = "2" },
-                    new PaymentMethod { CodePaymentMethod = "3" },
-                    new PaymentMethod { CodePaymentMethod = "4" }
+                    //new PaymentMethod { CodePaymentMethod = "3" },
+                    //new PaymentMethod { CodePaymentMethod = "4" }
+                },
+                Splits = new List<Split>
+                {
+                    new Split{
+                       CodeTaxType =  EnumTaxType.Percentage,
+                       CodeReceiverType= EnumReceiverType.Subaccount,
+                       Identity= "78310447000154",
+                       IsPayTax= false,
+                       Amount= 2,
+                    }
                 },
                 Messages = new List<string> { "Mensagem 1", "Mensagem 2" },
                 Emails = new List<string> { "email1@provedor1.com", "email2@provedor2.com.br" }
@@ -74,7 +84,7 @@ namespace Safe2Pay.Tests
             Console.WriteLine(response.InterestAmount);
             Console.WriteLine(response.DiscountAmount);
             Console.WriteLine(response.BankSlipUrl);
-            
+
             Console.WriteLine(response.Products.Count);
 
             foreach (var products in response.Products)
@@ -127,7 +137,7 @@ namespace Safe2Pay.Tests
             Console.WriteLine(response.InterestAmount);
             Console.WriteLine(response.DiscountAmount);
             Console.WriteLine(response.BankSlipUrl);
-            
+
             Console.WriteLine(response.Products.Count);
 
             foreach (var products in response.Products)

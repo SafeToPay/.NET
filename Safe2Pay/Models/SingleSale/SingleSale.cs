@@ -22,6 +22,7 @@ namespace Safe2Pay.Models
         public decimal InterestAmount { get; set; }
         public List<string> Emails { get; set; }
         public List<string> Messages { get; set; }
+        public List<Split> Splits { get; set; }
         public string Instruction { get; set; }
         public bool IsExcluded { get; set; }
         public SingleSalePayment Payment { get; set; }
