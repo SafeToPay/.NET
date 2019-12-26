@@ -17,7 +17,7 @@ namespace Safe2Pay.Response
         public bool IsApplyInterest { get; set; }
         public decimal InterestAmount { get; set; }
         public decimal DiscountAmount { get; set; }
-        public decimal BankSlipUrl { get; set; }
+        public string BankSlipUrl { get; set; }
         public string SingleSaleUrl { get; set; }
         public List<Product> Products { get; set; }
         public List<string> Emails { get; set; }
