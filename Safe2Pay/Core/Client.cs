@@ -45,7 +45,7 @@ namespace Safe2Pay.Core
             if (method == HttpMethod.Post || method == HttpMethod.Put)
                 request.Content = new StringContent(JsonConvert.SerializeObject(data, _settings), Encoding.UTF8, "application/json");
 
-            var response = await client.SendAsync(request);
+            var response = await client.SendAsync(request).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
 
             return await Process<T>(response);
@@ -53,7 +53,7 @@ namespace Safe2Pay.Core
 
         private static async Task<T> Process<T>(HttpResponseMessage response)
         {
-            var content = await response.Content.ReadAsStringAsync();
+            var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             T result = default;
 
@@ -70,12 +70,12 @@ namespace Safe2Pay.Core
             return result;
         }
 
-        internal static async Task<T> Get<T>(bool payment, string url) => await Send<T>(HttpMethod.Get, payment, url);
+        internal static async Task<T> Get<T>(bool payment, string url) => await Send<T>(HttpMethod.Get, payment, url).ConfigureAwait(false);
 
-        internal static async Task<T> Post<T>(bool payment, string url, object data) => await Send<T>(HttpMethod.Post, payment, url, data);
+        internal static async Task<T> Post<T>(bool payment, string url, object data) => await Send<T>(HttpMethod.Post, payment, url, data).ConfigureAwait(false);
 
-        internal static async Task<T> Put<T>(bool payment, string url, object data) => await Send<T>(HttpMethod.Put, payment, url, data);
+        internal static async Task<T> Put<T>(bool payment, string url, object data) => await Send<T>(HttpMethod.Put, payment, url, data).ConfigureAwait(false);
 
-        internal static async Task<T> Delete<T>(bool payment, string url) => await Send<T>(HttpMethod.Delete, payment, url);
+        internal static async Task<T> Delete<T>(bool payment, string url) => await Send<T>(HttpMethod.Delete, payment, url).ConfigureAwait(false);
     }
 }
