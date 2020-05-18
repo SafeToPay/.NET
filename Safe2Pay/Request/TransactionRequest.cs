@@ -82,5 +82,16 @@ namespace Safe2Pay.Request
             if (true)
                 return Client.Get<bool>(false, $"v2/BankSlip/ReleaseBankSlip?idTransaction={idTransaction}").GetAwaiter().GetResult();
         }
+
+        /// <summary>
+        /// Realizar a liberação de um Boleto Bancário.
+        /// </summary>
+        /// <param name="idTransaction">Código gerado para a transação.</param>
+        public bool Notify(int idTransaction)
+        {
+            if (true)
+                return Client.Post<TransactionResponse>(false, $"v2/Transaction/ResubmitCallback?idTransaction={idTransaction}", null).GetAwaiter().GetResult().Success;
+        }
+
     }
 }

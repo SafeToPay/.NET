@@ -17,6 +17,7 @@
         public string PaymentMethod { get; set; }
         public CustomerResponse Customer { get; set; }
         public decimal AmountPayment { get; set; }
+        public bool Success { get; set; }
         public PaymentObjectResponse PaymentObject { get; set; }
     }
 }
