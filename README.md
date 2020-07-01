@@ -2,7 +2,7 @@
 
 ![Safe2Pay](https://safe2pay.com.br/static/img/banner-github.png)
 
-#### Biblioteca de integração em .NET para o [Safe2Pay](https://safe2pay.com.br/Safe2Pay/).
+#### Biblioteca de integração em .NET para o [Safe2Pay](https://safe2pay.com.br/).
 
 Recomendamos a utilização do pacote da galeria do NuGet, para manter-se com a versão mais atualizada da biblioteca, com todas as funcionalidades atuais e as que estão por vir!
 
