@@ -2,6 +2,7 @@
 {
     public class Split
     {
+        public int IdReceiver { get; set; }
         public string Identity { get; set; }
         public bool IsPayTax { get; set; }
         public decimal Amount { get; set; }

@@ -13,9 +13,9 @@ namespace Safe2Pay.Models
         public string TechName { get; set; }
         public string TechIdentity { get; set; }
         public string TechEmail { get; set; }
+        public bool IsPanelRestricted { get; set; }
         public BankData BankData { get; set; }
         public Address Address { get; set; }
-        public MerchantConfiguration Configuration { get; set; }
         public List<MerchantSplit> MerchantSplit { get; set; }
     }
 }
