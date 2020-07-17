@@ -11,14 +11,12 @@ namespace Safe2Pay.Core
     internal class Client
     {
         private static HttpClient _client;
-        private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
-            { DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore };
         private static Uri _baseUri;
 
         internal Client(Config config)
         {
             _client = new HttpClient(new HttpClientHandler())
-                { BaseAddress = _baseUri, Timeout = TimeSpan.FromSeconds(config.Timeout) };
+                {BaseAddress = _baseUri, Timeout = TimeSpan.FromSeconds(config.Timeout)};
 
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -40,8 +38,17 @@ namespace Safe2Pay.Core
 
             var request = new HttpRequestMessage(method, _baseUri + endpoint);
 
-            if (method == HttpMethod.Post || method == HttpMethod.Put)
-                request.Content = new StringContent(JsonConvert.SerializeObject(data, Settings), Encoding.UTF8, "application/json");
+            if (data != null)
+            {
+                var json = JsonConvert.SerializeObject(data,
+                    new JsonSerializerSettings
+                    {
+                        DefaultValueHandling = DefaultValueHandling.Ignore,
+                        NullValueHandling = NullValueHandling.Ignore
+                    });
+
+                request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+            }
 
             var response = await client.SendAsync(request).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
@@ -57,7 +64,7 @@ namespace Safe2Pay.Core
 
             if (response.Content.Headers.ContentType.MediaType == "application/json")
             {
-                var responseObj = JsonConvert.DeserializeObject<Response<T>>(content, Settings);
+                var responseObj = JsonConvert.DeserializeObject<Response<T>>(content);
 
                 if (responseObj != null && responseObj.HasError)
                     throw new Safe2PayException(responseObj.ErrorCode, responseObj.Error);

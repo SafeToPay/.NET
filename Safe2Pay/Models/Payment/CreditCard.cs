@@ -9,5 +9,7 @@
         public string Token { get; set; }
         public int InstallmentQuantity { get; set; }
         public bool IsPreAuthorization { get; set; }
+        public bool IsApplyInterest { get; set; }
+        public decimal InterestRate { get; set; }
     }
 }
