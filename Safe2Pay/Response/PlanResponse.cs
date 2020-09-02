@@ -22,7 +22,7 @@ namespace Safe2Pay.Response
         public bool IsEnabled { get; set; }
         public bool IsImmediateCharge { get; set; }
         public string CallbackUrl { get; set; }
-        public DateTime ExpirationDate { get; set; }
+        public DateTime? ExpirationDate { get; set; }
         public DateTime CreatedDate { get; set; }
         public int DaysDue { get; set; }
         public int DaysBeforeCancel { get; set; }
