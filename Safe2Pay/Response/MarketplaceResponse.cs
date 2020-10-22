@@ -14,6 +14,9 @@ namespace Safe2Pay.Response
         public string Identity { get; set; }
         public Integration Integration { get; set; }
         public string Token { get; set; }
+        public string TokenSandbox { get; set; }
+        public string SecretKey { get; set; }
+        public string SecretKeySandbox { get; set; }
         public BankDataResponse BankData { get; set; }
         public AddressResponse Address { get; set; }
         public List<PaymentMethodResponse> PaymentMethods { get; set; }

@@ -13,8 +13,8 @@ namespace Safe2Pay
         public readonly InvoiceRequest Invoice;
         public readonly MarketplaceRequest Marketplace;
         public readonly CheckoutRequest Payment;
-        //public readonly PlanRequest Plan;
-        //public readonly SubscriptionRequest Subscription;
+        public readonly PlanRequest Plan;
+        public readonly SubscriptionRequest Subscription;
         public readonly TokenRequest Token;
         public readonly TransferRequest Transfer;
         public readonly TransactionRequest Transaction;
@@ -29,8 +29,8 @@ namespace Safe2Pay
             Invoice = new InvoiceRequest(this.config);
             Marketplace = new MarketplaceRequest(this.config);
             Payment = new CheckoutRequest(this.config);
-            //Plan = new PlanRequest(this.config);
-            //Subscription = new SubscriptionRequest(this.config);
+            Plan = new PlanRequest(this.config);
+            Subscription = new SubscriptionRequest(this.config);
             Token = new TokenRequest(this.config);
             Transfer = new TransferRequest(this.config);
             Transaction = new TransactionRequest(this.config);

@@ -6,7 +6,6 @@ namespace Safe2Pay.Models
     {
         public int Id { get; set; }
         public PlanFrequence PlanFrequence { get; set; }
-        public Merchant Merchant { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Amount { get; set; }
@@ -17,7 +16,6 @@ namespace Safe2Pay.Models
         public int DaysChurn { get; set; }
         public int DaysChurnAlert { get; set; }
         public int DaysDelayAlert { get; set; }
-        public bool IsProRata { get; set; }
         public bool IsEnabled { get; set; }
         public bool IsImmediateCharge { get; set; }
         public string CallbackUrl { get; set; }
@@ -29,7 +27,6 @@ namespace Safe2Pay.Models
         public decimal PenaltyAmount { get; set; }
         public decimal InterestAmount { get; set; }
         public string Message { get; set; }
-        public int SubscriptionTotal { get; set; }
-        public string Status { get; set; }
+        public bool IsChargeOverdue { get; set; }
     }
 }
