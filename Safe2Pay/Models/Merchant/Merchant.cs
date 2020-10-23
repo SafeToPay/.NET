@@ -17,5 +17,7 @@ namespace Safe2Pay.Models
         public BankData BankData { get; set; }
         public Address Address { get; set; }
         public List<MerchantSplit> MerchantSplit { get; set; }
+        public Bank Bank { get; set; }
+        public AccountType AccountType  { get; set; }
     }
 }

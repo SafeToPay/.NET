@@ -20,5 +20,7 @@ namespace Safe2Pay.Models
         public SingleSalePayment Payment { get; set; }
         public List<Product> Products { get; set; }
         public List<PaymentMethod> PaymentMethods { get; set; }
+        public int InstallmentQuantity { get; set; }
+        public int DiscountType { get; set; }
     }
 }

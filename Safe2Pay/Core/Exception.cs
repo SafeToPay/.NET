@@ -2,7 +2,7 @@
 
 namespace Safe2Pay.Core
 {
-    internal class Safe2PayException : Exception
+    public class Safe2PayException : Exception
     {
         public Safe2PayException(string error) : base(error)
         {

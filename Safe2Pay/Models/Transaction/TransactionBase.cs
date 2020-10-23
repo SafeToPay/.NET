@@ -15,6 +15,7 @@ namespace Safe2Pay.Models
         public List<Product> Products { get; set; }
         public List<Split> Splits { get; set; }
         public bool ShouldUseAntifraud { get; set; }
-
+        public string VisitorID { get; set; }
+        public string IpAddress { get; set; }
     }
 }
