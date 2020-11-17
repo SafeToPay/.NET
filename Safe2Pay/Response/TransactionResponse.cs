@@ -1,4 +1,6 @@
-﻿namespace Safe2Pay.Response
+﻿using System.Collections.Generic;
+
+namespace Safe2Pay.Response
 {
     public class TransactionResponse
     {
@@ -19,5 +21,6 @@
         public decimal AmountPayment { get; set; }
         public bool Success { get; set; }
         public PaymentObjectResponse PaymentObject { get; set; }
+        public List<SplitResponse> Splits { get; set; }
     }
 }

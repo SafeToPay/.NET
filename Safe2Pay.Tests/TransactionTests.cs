@@ -17,6 +17,35 @@ namespace Safe2Pay.Tests
 
             Console.WriteLine(response.IdTransaction);
             Console.WriteLine(response.Status);
+            Console.WriteLine(response.Message);
+            Console.WriteLine(response.Application);
+            Console.WriteLine(response.Vendor);
+            Console.WriteLine(response.Reference);
+            Console.WriteLine(response.PaymentDate);
+            Console.WriteLine(response.CreatedDate);
+            Console.WriteLine(response.Amount);
+            Console.WriteLine(response.NetValue);
+            Console.WriteLine(response.DiscountAmount);
+            Console.WriteLine(response.TaxValue);
+            Console.WriteLine(response.PaymentMethod);
+            Console.WriteLine(response.Customer);
+            Console.WriteLine(response.AmountPayment);
+            Console.WriteLine(response.Success);
+            Console.WriteLine(response.PaymentObject);
+            Console.WriteLine(response.AmountPayment);
+            foreach (var items in response.Splits)
+            {
+                Console.WriteLine(" --- ");
+
+                Console.WriteLine(items.IdTransactionSplitter);
+                Console.WriteLine(items.Name);
+                Console.WriteLine(items.Identity);
+                Console.WriteLine(items.IdReceiver);
+                Console.WriteLine(items.IsPayTax);
+                Console.WriteLine(items.Amount);
+
+                Console.WriteLine(" --- ");
+            }
         }
 
         [Test]
