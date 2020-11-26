@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Safe2Pay.Models
+namespace Safe2Pay.Models.Payment
 {
     public class Payment
     {

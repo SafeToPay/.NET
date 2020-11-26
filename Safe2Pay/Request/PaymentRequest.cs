@@ -1,6 +1,8 @@
 ﻿using Safe2Pay.Core;
 using Safe2Pay.Models;
+using Safe2Pay.Models.Payment;
 using Safe2Pay.Response;
+using System;
 
 namespace Safe2Pay.Request
 {
@@ -25,7 +27,7 @@ namespace Safe2Pay.Request
         }
 
         /// <summary>
-        /// Geração de uma transação por Boleto Bancário.
+        /// Geração de uma transação por Cartão de Crédito.
         /// </summary>
         /// <param name="transaction">Objeto com base na classe Transaction, do tipo CreditCard.</param>
         /// <returns></returns>
@@ -35,7 +37,7 @@ namespace Safe2Pay.Request
         }
 
         /// <summary>
-        /// Geração de uma transação por Boleto Bancário.
+        /// Geração de uma transação por Criptomoeda.
         /// </summary>
         /// <param name="transaction">Objeto com base na classe Transaction, do tipo CryptoCoin.</param>
         /// <returns></returns>
@@ -45,13 +47,22 @@ namespace Safe2Pay.Request
         }
 
         /// <summary>
-        /// Geração de uma transação por Boleto Bancário.
+        /// Geração de uma transação por Cartão de débito.
         /// </summary>
         /// <param name="transaction">Objeto com base na classe Transaction, do tipo DebitCard.</param>
         /// <returns></returns>
         public DebitCardResponse Debit(Transaction<DebitCard> transaction)
         {
             return Client.Post<DebitCardResponse>(true, "v2/Payment", transaction).GetAwaiter().GetResult();
+        }
+        /// <summary>
+        /// Geração de uma transação pelo PIX.
+        /// </summary>
+        /// <param name="transaction">Objeto com base na classe Transaction, do tipo PIX.</param>
+        /// <returns></returns>
+        public PixResponse Pix(Transaction<Pix> transaction)
+        {
+                return Client.Post<PixResponse>(true, "v2/Payment", transaction).GetAwaiter().GetResult();
         }
     }
 }

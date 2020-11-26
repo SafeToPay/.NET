@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using Safe2Pay.Models;
+using Safe2Pay.Models.Payment;
 
 namespace Safe2Pay.Tests
 {
@@ -15,7 +16,7 @@ namespace Safe2Pay.Tests
         {
             var transaction = new Transaction<BankSlip>
             {
-                IsSandbox = true,
+                IsSandbox = false,
 
                 CallbackUrl = "http://url.de.callback.com/",
                 Application = "Teste",
@@ -96,7 +97,7 @@ namespace Safe2Pay.Tests
         {
             var transaction = new Transaction<CreditCard>
             {
-                IsSandbox = true,
+                IsSandbox = false,
 
                 CallbackUrl = "http://url.de.callback.com/",
                 Application = "Nome da Aplicação",
@@ -326,6 +327,54 @@ namespace Safe2Pay.Tests
             Console.WriteLine(response.AuthenticationUrl);
             Console.WriteLine(response.DebitCard.CardNumber);
             Console.WriteLine(response.DebitCard.Brand);
+        }
+        [Test]
+        public void Pix()
+        {
+            var transaction = new Transaction<Pix>
+            {
+                IsSandbox = false,
+
+                CallbackUrl = "http://url.de.callback.com/",
+                Application = "Nome da Aplicação",
+                Vendor = "Vendedor",
+                Reference = "safe2pay-dotnet",
+                Customer = new Customer
+                {
+                    Name = "Cliente de Teste",
+                    Identity = RandomCNPJ(),
+                    Email = "email@provedor.com.br",
+                    Phone = "51 99999 9999",
+                    Address = new Address
+                    {
+                        Street = "Rua Tomaz Gonzaga",
+                        Number = "481",
+                        District = "Três Figueiras",
+                        ZipCode = "91340-480",
+                        CityName = "Porto Alegre",
+                        StateInitials = "RS",
+                        CountryName = "Brasil"
+                    }
+                },
+                Products = new List<Product>
+                {
+                    new Product { Code = "001", Description = "Produto 1", UnitPrice = 10M, Quantity = 1M },
+                    new Product { Code = "002", Description = "Produto 2", UnitPrice = 20M, Quantity = 1M },
+                    new Product { Code = "003", Description = "Produto 3", UnitPrice = 30M, Quantity = 1M }
+                },
+                PaymentMethod = new PaymentMethod { Code = "6" }
+            };
+
+            var response = safe2pay.Payment.Pix(transaction);
+
+            Assert.NotNull(response);
+
+            Console.WriteLine(response.IdTransaction);
+            Console.WriteLine(response.Status);
+            Console.WriteLine(response.Message);
+            Console.WriteLine(response.Description);
+            Console.WriteLine(response.QrCode);
+            Console.WriteLine(response.Key);
         }
 
         public static string RandomCNPJ()

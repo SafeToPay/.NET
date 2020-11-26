@@ -8,7 +8,7 @@ namespace Safe2Pay.Tests
     [TestFixture]
     public class InvoiceTests
     {
-        private static readonly Safe2Pay_Request safe2pay = new Safe2Pay_Request("x-api-key", "SECRET", 30);
+        private static readonly Safe2Pay_Request safe2pay = new Safe2Pay_Request("TOKEN", "SECRET", 30);
 
         [Test]
         public void New()
