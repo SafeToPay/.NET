@@ -3,10 +3,9 @@ using System.Collections.Generic;
 
 namespace Safe2Pay.Models.Subscription
 {
-    public class SubscriptionRequest
+    public class Subscription
     {
         public int Plan { get; set; }
-        public int Subscription { get; set; }
         public string PaymentMethod { get; set; }
         public List<string> Emails { get; set; }
         public Customer Customer { get; set; }

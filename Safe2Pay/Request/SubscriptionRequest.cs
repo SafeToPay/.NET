@@ -1,5 +1,6 @@
 ﻿using Safe2Pay.Core;
 using Safe2Pay.Models;
+using Safe2Pay.Models.Subscription;
 
 namespace Safe2Pay.Request
 {
@@ -17,7 +18,7 @@ namespace Safe2Pay.Request
         /// Tokenizar Cartão de Crédito.
         /// </summary>
         /// <param name="creditCard">Objeto com base na classe CreditCard.</param>
-        public object New(SubscriptionRequest subscription)
+        public object New(Subscription subscription)
         {
             return Client.Post<object>(false, "v2/Subscription/Add", subscription).GetAwaiter().GetResult();
         }
