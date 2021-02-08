@@ -29,9 +29,9 @@ namespace Safe2Pay.Request
         /// </summary>
         /// <param name="pageNumber">Número da página da listagem.</param>
         /// <param name="rowsPerPage">Número de itens por página.</param>
-        public List<TransactionResponse> List(int pageNumber = 1, int rowsPerPage = 10)
+        public List<TransactionResponse> List(int pageNumber = 1, int rowsPerPage = 10, bool isSandbox = true)
         {
-            return Client.Get<ListObject<TransactionResponse>>(false, $"v2/Transaction/List?PageNumber={pageNumber}&RowsPerPage={rowsPerPage}").GetAwaiter().GetResult().Objects;
+            return Client.Get<ListObject<TransactionResponse>>(false, $"v2/Transaction/List?PageNumber={pageNumber}&RowsPerPage={rowsPerPage}&Object.IsSandbox={isSandbox}").GetAwaiter().GetResult().Objects;
         }
 
         /// <summary>

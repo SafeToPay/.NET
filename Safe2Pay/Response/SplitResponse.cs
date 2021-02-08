@@ -9,7 +9,7 @@ namespace Safe2Pay.Response
         public int IdTransactionSplitter { get; set; }
         public string Name { get; set; }
         public string Identity { get; set; }
-        public int IdReceiver { get; set; }
+        public int? IdReceiver { get; set; }
         public bool IsPayTax { get; set; }
         public decimal Amount { get; set; }
 

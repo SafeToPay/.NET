@@ -6,7 +6,7 @@ namespace Safe2Pay.Tests
     [TestFixture]
     public class TransactionTests
     {
-        private static readonly Safe2Pay_Request safe2pay = new Safe2Pay_Request("TOKEN", "SECRET", 30);
+        private static readonly Safe2Pay_Request safe2pay = new Safe2Pay_Request("5325F24FD8A0402D8BF6362C489C66F7", "SECRET", 30);
 
         [Test]
         public void Get_Transaction()
@@ -33,19 +33,23 @@ namespace Safe2Pay.Tests
             Console.WriteLine(response.Success);
             Console.WriteLine(response.PaymentObject);
             Console.WriteLine(response.AmountPayment);
-            foreach (var items in response.Splits)
+            if(response.Splits != null)
             {
-                Console.WriteLine(" --- ");
+                foreach (var items in response.Splits)
+                {
+                    Console.WriteLine(" --- ");
 
-                Console.WriteLine(items.IdTransactionSplitter);
-                Console.WriteLine(items.Name);
-                Console.WriteLine(items.Identity);
-                Console.WriteLine(items.IdReceiver);
-                Console.WriteLine(items.IsPayTax);
-                Console.WriteLine(items.Amount);
+                    Console.WriteLine(items.IdTransactionSplitter);
+                    Console.WriteLine(items.Name);
+                    Console.WriteLine(items.Identity);
+                    Console.WriteLine(items.IdReceiver);
+                    Console.WriteLine(items.IsPayTax);
+                    Console.WriteLine(items.Amount);
 
-                Console.WriteLine(" --- ");
+                    Console.WriteLine(" --- ");
+                }
             }
+            
         }
 
         [Test]
