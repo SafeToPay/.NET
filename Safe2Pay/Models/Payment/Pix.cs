@@ -6,7 +6,6 @@ namespace Safe2Pay.Models.Payment
 {
     public class Pix
     {
-        public string QrCode{ get; set; }
-        public string Key { get; set; }
+        public int Expiration { get; set; }
     }
 }

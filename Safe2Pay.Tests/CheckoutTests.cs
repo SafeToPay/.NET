@@ -306,8 +306,6 @@ namespace Safe2Pay.Tests
                 PaymentMethod = new PaymentMethod { Code = "4" },
                 PaymentObject = new DebitCard
                 {
-                    Authenticate = true,
-
                     CardNumber = "4111111111111111",
                     Holder = "Cliente de Teste",
                     ExpirationDate = "03/2020",
@@ -342,7 +340,7 @@ namespace Safe2Pay.Tests
                 Customer = new Customer
                 {
                     Name = "Cliente de Teste",
-                    Identity = RandomCNPJ(),
+                    Identity = "04040761065",
                     Email = "email@provedor.com.br",
                     Phone = "51 99999 9999",
                     Address = new Address
@@ -362,7 +360,12 @@ namespace Safe2Pay.Tests
                     new Product { Code = "002", Description = "Produto 2", UnitPrice = 20M, Quantity = 1M },
                     new Product { Code = "003", Description = "Produto 3", UnitPrice = 30M, Quantity = 1M }
                 },
-                PaymentMethod = new PaymentMethod { Code = "6" }
+                PaymentMethod = new PaymentMethod { Code = "6" },
+
+                PaymentObject = new Pix
+                {
+                    Expiration = 3600
+                }
             };
 
             var response = safe2pay.Payment.Pix(transaction);
