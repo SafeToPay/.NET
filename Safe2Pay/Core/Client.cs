@@ -10,7 +10,7 @@ namespace Safe2Pay.Core
 {
     internal class Client
     {
-        private static HttpClient _client;
+        private readonly HttpClient _client;
         private static Uri _baseUri;
 
         internal Client(Config config)
@@ -23,7 +23,7 @@ namespace Safe2Pay.Core
             _client.DefaultRequestHeaders.Add("X-API-KEY", config.Token);
         }
 
-        private static HttpClient CreateClient(bool payment)
+        private HttpClient CreateClient(bool payment)
         {
             _baseUri = payment
                 ? new Uri("https://payment.safe2pay.com.br/")
@@ -32,7 +32,7 @@ namespace Safe2Pay.Core
             return _client;
         }
 
-        private static async Task<T> Send<T>(HttpMethod method, bool payment, string endpoint, object data = null)
+        private async Task<T> Send<T>(HttpMethod method, bool payment, string endpoint, object data = null)
         {
             var client = CreateClient(payment);
 
@@ -75,12 +75,12 @@ namespace Safe2Pay.Core
             return result;
         }
 
-        internal static async Task<T> Get<T>(bool payment, string url) => await Send<T>(HttpMethod.Get, payment, url).ConfigureAwait(false);
+        internal async Task<T> Get<T>(bool payment, string url) => await Send<T>(HttpMethod.Get, payment, url).ConfigureAwait(false);
 
-        internal static async Task<T> Post<T>(bool payment, string url, object data) => await Send<T>(HttpMethod.Post, payment, url, data).ConfigureAwait(false);
+        internal async Task<T> Post<T>(bool payment, string url, object data) => await Send<T>(HttpMethod.Post, payment, url, data).ConfigureAwait(false);
 
-        internal static async Task<T> Put<T>(bool payment, string url, object data) => await Send<T>(HttpMethod.Put, payment, url, data).ConfigureAwait(false);
+        internal async Task<T> Put<T>(bool payment, string url, object data) => await Send<T>(HttpMethod.Put, payment, url, data).ConfigureAwait(false);
 
-        internal static async Task<T> Delete<T>(bool payment, string url) => await Send<T>(HttpMethod.Delete, payment, url).ConfigureAwait(false);
+        internal async Task<T> Delete<T>(bool payment, string url) => await Send<T>(HttpMethod.Delete, payment, url).ConfigureAwait(false);
     }
 }
