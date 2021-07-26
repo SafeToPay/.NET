@@ -25,6 +25,11 @@ namespace Safe2Pay.Request
             return Client.Put<PlanResponse>(false, "v2/Plan/Update", plan).GetAwaiter().GetResult();
         }
 
+        public PlanResponse UpdateEnabled(Plan plan)
+        {
+            return Client.Put<PlanResponse>(false, "v2/Plan/UpdateEnabled", plan).GetAwaiter().GetResult();
+        }
+
         public PlanResponse Get(int id)
         {
             return Client.Get<PlanResponse>(false, $"v2/Plan/Get?Id={id}").GetAwaiter().GetResult();
@@ -34,7 +39,7 @@ namespace Safe2Pay.Request
         //{
         //    return Client.Delete<object>(false, $"v2/Plan/Delete?Id={id}").GetAwaiter().GetResult();
         //}
-
+        
         public List<PlanResponse> List(int pageNumber = 1, int rowsPerPage = 10)
         {
             return Client.Get<ListObject<PlanResponse>>(false, $"v2/Plan/List?PageNumber={pageNumber}&RowsPerPage={rowsPerPage}").GetAwaiter().GetResult().Objects;

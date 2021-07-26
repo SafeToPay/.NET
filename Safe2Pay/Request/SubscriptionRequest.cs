@@ -43,6 +43,11 @@ namespace Safe2Pay.Request
             return Client.Delete<object>(false, $"v2/Subscription/Delete?Id={id}").GetAwaiter().GetResult();
         }
 
+        public object UpdateTokenCard(CreditCard creditCard, int id)
+        {
+            return Client.Put<object>(false, $"v2/Subscription/UpdateTokenCard{id}", creditCard).GetAwaiter().GetResult();
+        }
+
         public object List(int pageNumber = 1, int rowsPerPage = 10)
         {
             return Client.Get<object>(false, $"v2/Subscription/List?PageNumber={pageNumber}&RowsPerPage={rowsPerPage}").GetAwaiter().GetResult();
