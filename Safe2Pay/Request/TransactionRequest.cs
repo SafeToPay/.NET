@@ -74,6 +74,16 @@ namespace Safe2Pay.Request
         }
 
         /// <summary>
+        /// Realizar o estorno de uma cobrança em pix.
+        /// </summary>
+        /// <param name="idTransaction">Código gerado para a transação.</param>
+        public bool CancelPix(int idTransaction)
+        {
+            if (true)
+                return Client.Delete<bool>(false, $"v2/Pix/Cancel/{idTransaction}").GetAwaiter().GetResult();
+        }
+
+        /// <summary>
         /// Realizar a liberação de um Boleto Bancário.
         /// </summary>
         /// <param name="idTransaction">Código gerado para a transação.</param>
