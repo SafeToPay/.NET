@@ -100,7 +100,7 @@ namespace Safe2Pay.Request
         public bool Notify(int idTransaction)
         {
             if (true)
-                return Client.Post<TransactionResponse>(false, $"v2/Transaction/ResubmitCallback?idTransaction={idTransaction}", null).GetAwaiter().GetResult().Success;
+                return Client.Post<bool>(false, $"v2/Transaction/ResubmitCallback?idTransaction={idTransaction}", null).GetAwaiter().GetResult();
         }
 
     }
