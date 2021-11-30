@@ -1,4 +1,6 @@
-﻿namespace Safe2Pay.Response
+﻿using System.Collections.Generic;
+
+namespace Safe2Pay.Response
 {
     public class MerchantPaymentMethodResponse
     {

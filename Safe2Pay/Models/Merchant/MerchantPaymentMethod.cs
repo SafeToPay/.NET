@@ -2,7 +2,7 @@
 
 namespace Safe2Pay.Models
 {
-    public class MerchantPaymentMethod
+    public class MerchantPaymentMethod : ListObject<MerchantPaymentMethod>
     {
         public int Id { get; set; }
         public Merchant Merchant { get; set; }

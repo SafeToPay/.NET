@@ -19,6 +19,7 @@ namespace Safe2Pay
         public readonly TransferRequest Transfer;
         public readonly TransactionRequest Transaction;
         public readonly AdvancePaymentRequest AdvancePayment;
+        public readonly MerchantPaymentMethodRequest merchantPaymentMethod;
 
         private Safe2Pay_Request(Config config)
         {
@@ -36,6 +37,7 @@ namespace Safe2Pay
             Transfer = new TransferRequest(this.config);
             Transaction = new TransactionRequest(this.config);
             AdvancePayment = new AdvancePaymentRequest(this.config);
+            merchantPaymentMethod = new MerchantPaymentMethodRequest(this.config);
         }
 
         public Safe2Pay_Request(string token, string secret = null, int timeout = 60) : this(new Config(token, secret, timeout))

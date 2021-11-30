@@ -1,6 +1,8 @@
 ﻿using Safe2Pay.Core;
+using Safe2Pay.Models;
 using Safe2Pay.Response;
 using System;
+using System.Collections.Generic;
 
 namespace Safe2Pay.Request
 {
@@ -17,9 +19,9 @@ namespace Safe2Pay.Request
         /// <summary>
         /// Consultar formas de pagamento da empresa
         /// </summary>
-        public MerchantPaymentMethodResponse List()
+        public List<MerchantPaymentMethodResponse> List()
         {
-            return Client.Get<MerchantPaymentMethodResponse>(false, "v2/MerchantPaymentMethod/List").GetAwaiter().GetResult();
+            return Client.Get<List<MerchantPaymentMethodResponse>>(false, "v2/MerchantPaymentMethod/List").GetAwaiter().GetResult();
         }
     }
 }
