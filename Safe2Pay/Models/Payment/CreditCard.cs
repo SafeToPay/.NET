@@ -11,5 +11,6 @@
         public bool IsPreAuthorization { get; set; }
         public bool IsApplyInterest { get; set; }
         public decimal InterestRate { get; set; }
+        public string SoftDescriptor { get; set; }
     }
 }

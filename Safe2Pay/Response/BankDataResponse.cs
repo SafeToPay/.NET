@@ -8,5 +8,6 @@
         public string Account { get; set; }
         public string AccountDigit { get; set; }
         public string Operation { get; set; }
+        public string AccountType { get; set; }
     }
 }
