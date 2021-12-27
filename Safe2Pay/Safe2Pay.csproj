@@ -4,7 +4,7 @@
     <TargetFramework>netstandard1.4</TargetFramework>
     <Authors>Safe2Pay</Authors>
     <Company>Safe2Pay Intermediação de Negócios Ltda.</Company>
-    <Version>1.3.3</Version>
+    <Version>1.3.4</Version>
     <PackageIconUrl></PackageIconUrl>
     <PackageProjectUrl>https://safe2pay.com.br/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SafeToPay/</RepositoryUrl>
@@ -19,8 +19,8 @@ Construído em .NET Standard 1.3, também compatível com .NET Framework 4.6+ e 
     <PackageTags></PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
-    <AssemblyVersion>1.3.3</AssemblyVersion>
-    <FileVersion>1.3.2</FileVersion>
+    <AssemblyVersion>1.3.4</AssemblyVersion>
+    <FileVersion>1.3.4</FileVersion>
     <RootNamespace>Safe2Pay</RootNamespace>
     <PackageIcon>s2p.png</PackageIcon>
   </PropertyGroup>
