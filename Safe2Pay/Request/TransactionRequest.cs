@@ -44,6 +44,15 @@ namespace Safe2Pay.Request
         }
 
         /// <summary>
+        /// Capturar transação por Cartão de Crédito.
+        /// </summary>
+        /// <param name="idTransaction">Código gerado para a transação.</param>
+        public CreditCardResponse Capture(int idTransaction, decimal amount)
+        {
+            return Client.Put<CreditCardResponse>(false, $"v2/CreditCard/Capture/{idTransaction}/{amount}", null).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
         /// Estornar transação autorizada por Cartão de Crédito.
         /// </summary>
         /// <param name="idTransaction">Código gerado para a transação.</param>
